@@ -3,6 +3,7 @@ language: php
 php:
   - 7.1
   - 7.2
+  - 7.3
 
 env:
   matrix:
@@ -10,7 +11,8 @@ env:
     - COMPOSER_FLAGS=""
 matrix:
   exclude:
-    - php: 7.2
+    - php: 7.1
+    - php: 7.3
       env: COMPOSER_FLAGS="--prefer-lowest"
 
 before_script:
