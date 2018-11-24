@@ -9,9 +9,8 @@
 namespace App\Transformers;
 
 use App\Models\Auth\User\User;
-use League\Fractal\TransformerAbstract;
 
-class UserTransformer extends TransformerAbstract
+class UserTransformer extends BaseTransformer
 {
     /**
      * A Fractal transformer.
@@ -21,11 +20,13 @@ class UserTransformer extends TransformerAbstract
      */
     public function transform(User $user)
     {
-        return [
+        $response = [
             'id' => $user->id,
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
         ];
+
+        return $this->addTimesHumanReadable($user, $response);
     }
 }
