@@ -23,7 +23,9 @@ $app = new Laravel\Lumen\Application(realpath(__DIR__.'/../'));
 
 $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
+
+$app->configure('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -55,9 +57,9 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -70,9 +72,13 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+//$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+
+$app->register(Laravel\Passport\PassportServiceProvider::class);
+$app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+$app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
 if ($app->environment() !== 'production') {
     $app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
 }
