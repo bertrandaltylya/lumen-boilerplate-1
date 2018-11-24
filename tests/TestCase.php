@@ -15,6 +15,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
         $this->setUpDatabase(function () {
             $this->artisan('db:seed');
+            $this->artisan('passport:install');
         });
         $this->beginDatabaseTransaction();
     }

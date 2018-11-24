@@ -10,7 +10,6 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer update --no-interaction --prefer-source
   - travis_retry composer dumpautoload -o
-  - travis_retry php artisan passport:install
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
