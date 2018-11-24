@@ -8,8 +8,11 @@
 
 namespace App\Repositories;
 
+use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository as BaseRepo;
+use Prettus\Repository\Traits\CacheableRepository;
 
-abstract class BaseRepository extends BaseRepo
+abstract class BaseRepository extends BaseRepo implements CacheableInterface
 {
+    use CacheableRepository;
 }

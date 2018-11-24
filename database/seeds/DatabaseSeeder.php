@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call('AuthSeeder');
 
-        Artisan::call('cache:clear');
+        app('cache')->flush();
     }
 }
