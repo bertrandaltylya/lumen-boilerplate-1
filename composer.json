@@ -37,6 +37,10 @@
   "scripts": {
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "clear-all": [
+      "@php artisan cache:clear",
+      "composer dump-autoload --no-interaction --ansi --verbose --optimize"
     ]
   },
   "config": {
