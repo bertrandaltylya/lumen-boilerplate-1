@@ -6,9 +6,9 @@
  * Time: 3:23 PM
  */
 
-namespace App\Repositories\User;
+namespace App\Repositories\Auth\User;
 
-use App\Models\User\User;
+use App\Models\Auth\User\User;
 use App\Repositories\BaseRepository;
 
 class UserRepository extends BaseRepository

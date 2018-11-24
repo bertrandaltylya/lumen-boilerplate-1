@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use App\Repositories\User\UserRepository;
+use App\Http\Controllers\Controller;
+use App\Repositories\Auth\User\UserRepository;
 use App\Transformers\UserTransformer;
 
 class UsersController extends Controller

@@ -11,7 +11,7 @@
 |
 */
 
-use App\Models\User\User;
+use App\Models\Auth\User\User;
 use Illuminate\Support\Facades\Hash;
 
 $factory->define(User::class, function (Faker\Generator $faker) {

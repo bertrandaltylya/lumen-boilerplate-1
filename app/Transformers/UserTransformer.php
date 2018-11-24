@@ -8,7 +8,7 @@
 
 namespace App\Transformers;
 
-use App\Models\User\User;
+use App\Models\Auth\User\User;
 use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
@@ -16,7 +16,7 @@ class UserTransformer extends TransformerAbstract
     /**
      * A Fractal transformer.
      *
-     * @param \App\Models\User\User $user
+     * @param \App\Models\Auth\User\User $user
      * @return array
      */
     public function transform(User $user)
