@@ -30,9 +30,13 @@ abstract class TestCase extends BaseTestCase
         return require __DIR__.'/../bootstrap/app.php';
     }
 
-    protected function loggedInAsSystem(): User
+    protected function loggedInAs(string $roleName = 'system'): User
     {
-        $user = factory(User::class)->create();
+        if ($roleName == 'user') {
+            $user = factory(User::class)->create();
+        } else {
+            $user = User::role($roleName)->first();
+        }
         $this->actingAs($user);
 
         return $user;

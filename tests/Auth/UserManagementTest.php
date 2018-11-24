@@ -18,9 +18,21 @@ class UserManagementTest extends TestCase
     /**
      * @test
      */
-    public function systemCanAccessIndex()
+    public function cannotAccessByNoRoles()
     {
-        $this->loggedInAsSystem();
+        $this->loggedInAs('user');
+        $this->get('/user');
+        $this->assertResponseStatus(Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * @test
+     * @testWith        ["system"]
+     *                  ["admin"]
+     */
+    public function canAccessIndex($roleName)
+    {
+        $this->loggedInAs($roleName);
         $this->get('/user');
         $this->assertResponseOk();
     }

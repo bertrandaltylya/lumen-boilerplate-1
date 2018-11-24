@@ -12,6 +12,10 @@ class UsersController extends Controller
 
     public function __construct(UserRepository $userRepository)
     {
+        $permissions = $userRepository->model()::PERMISSIONS;
+
+        $this->middleware('permission:'.$permissions['index'], ['only' => 'index']);
+
         $this->userRepository = $userRepository;
     }
 

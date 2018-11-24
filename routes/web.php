@@ -19,11 +19,5 @@ $router->group([
     'middleware' => 'auth',
 ], function () use ($router) {
 
-    $router->group([
-        'namespace' => 'Backend\Auth',
-        'prefix' => 'user',
-    ], function () use ($router) {
-
-        $router->get('/', 'UsersController@index');
-    });
+    include 'backend/user.php';
 });

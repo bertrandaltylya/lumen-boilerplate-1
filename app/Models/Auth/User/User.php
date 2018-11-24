@@ -40,8 +40,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'deactivated list' => 'user deactivated list',
     ];
 
-    protected $guard_name = 'api';
-
     /**
      * The attributes that are mass assignable.
      *
