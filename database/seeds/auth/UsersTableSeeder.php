@@ -24,6 +24,11 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('secret'),
         ]);
 
+        $user = factory(User::class)->create([
+            'email' => 'user@user.com',
+            'password' => Hash::make('secret'),
+        ]);
+
         $system->assignRole('system');
         $admin->assignRole('admin');
 
