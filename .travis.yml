@@ -24,3 +24,8 @@ before_script:
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+after_failure:
+  - echo --------------- Begin > Laravel.log ---------------
+  - cat storage/logs/laravel.log
+  - echo --------------- End   > Laravel.log ---------------
