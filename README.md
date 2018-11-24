@@ -22,7 +22,7 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 * [spatie/laravel-permission](https://github.com/spatie/laravel-permission) - Associate users with roles and permissions *[TODO]*
 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/lloricode/lumen-boilerplate/graphs/contributors) who participated in this project.
 
 ## License
 
