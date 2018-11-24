@@ -22,7 +22,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => \App\User::class,
+            'model' => \App\Models\User\User::class,
         ],
     ],
 ];

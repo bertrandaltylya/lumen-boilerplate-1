@@ -26,6 +26,7 @@ $app->withFacades();
 $app->withEloquent();
 
 $app->configure('auth');
+$app->configure('fractal');
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,8 @@ $app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
 if ($app->environment() !== 'production') {
     $app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
 }
+
+$app->register(Prettus\Repository\Providers\RepositoryServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
