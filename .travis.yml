@@ -4,12 +4,13 @@ php:
   - 7.0
   - 7.1
   - 7.2
+  - 7.3
 
 before_script:
   - travis_retry composer self-update
   - travis_retry composer update --no-interaction --prefer-source
   - travis_retry composer dumpautoload -o
-  - php artisan passport:install
+  - travis_retry php artisan passport:install
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
