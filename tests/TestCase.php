@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\Auth\User\User;
 use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -26,5 +27,13 @@ abstract class TestCase extends BaseTestCase
     public function createApplication()
     {
         return require __DIR__.'/../bootstrap/app.php';
+    }
+
+    protected function loggedInAsSystem(): User
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
+
+        return $user;
     }
 }
