@@ -2,38 +2,23 @@
 
 namespace Tests;
 
-use Symfony\Component\HttpFoundation\Response;
-
 class UserManagementTest extends TestCase
 {
     /**
+     * @param $roleName
+     * @param $statusCode
      * @test
+     * @testWith        ["system", 200]
+     *                  ["admin", 200]
+     *                  ["user", 403]
+     *                  ["", 401]
      */
-    public function cannotAccessByGuest()
+    public function canAccessIndex($roleName, $statusCode)
     {
+        if (! empty($roleName)) {
+            $this->loggedInAs($roleName);
+        }
         $this->get('/user');
-        $this->assertResponseStatus(Response::HTTP_UNAUTHORIZED);
-    }
-
-    /**
-     * @test
-     */
-    public function cannotAccessByNoRoles()
-    {
-        $this->loggedInAs('user');
-        $this->get('/user');
-        $this->assertResponseStatus(Response::HTTP_FORBIDDEN);
-    }
-
-    /**
-     * @test
-     * @testWith        ["system"]
-     *                  ["admin"]
-     */
-    public function canAccessIndex($roleName)
-    {
-        $this->loggedInAs($roleName);
-        $this->get('/user');
-        $this->assertResponseOk();
+        $this->assertResponseStatus($statusCode);
     }
 }
