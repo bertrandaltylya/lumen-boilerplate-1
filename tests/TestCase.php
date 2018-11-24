@@ -1,7 +1,23 @@
 <?php
 
-abstract class TestCase extends Laravel\Lumen\Testing\TestCase
+namespace Tests;
+
+use Laravel\Lumen\Testing\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
 {
+    use UsesDatabase;
+
+    public function setUp()
+    {
+        $this->prepareDatabase();
+        parent::setUp();
+        $this->setUpDatabase(function () {
+            $this->artisan('db:seed');
+        });
+        $this->beginDatabaseTransaction();
+    }
+
     /**
      * Creates the application.
      *
