@@ -26,6 +26,6 @@ script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_failure:
-  - echo --------------- Begin > Laravel.log ---------------
-  - cat storage/logs/laravel.log
-  - echo --------------- End   > Laravel.log ---------------
+  - echo --------------- Begin > lumen.log ---------------
+  - cat storage/logs/lumen.log
+  - echo --------------- End   > lumen.log ---------------
