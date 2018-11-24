@@ -1,1 +1,29 @@
-# lumen-boilerplate
+# Lumen Boilerplate
+
+A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated with [laravel/passport](https://github.com/laravel/passport)
+
+
+
+### Installing
+
+*[TODO]*
+
+## Running the tests
+
+*[TODO]*
+
+
+## Built With
+
+* [laravel/lumen-framework:5.7.*](https://github.com/laravel/lumen-framework) - The stunningly fast micro-framework by Laravel
+* [laravel/passport](https://github.com/laravel/passport) - API Authentication
+* [andersao/l5-repository](https://github.com/andersao/l5-repository) - Repositories to abstract the database layer
+* [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal) - Make response standard
+* [spatie/laravel-permission](https://github.com/spatie/laravel-permission) - Associate users with roles and permissions *[TODO]*
+
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/lloricode/lumen-boilerplate/blob/master/LICENSE) file for details
