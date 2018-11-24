@@ -27,6 +27,7 @@ $app->withEloquent();
 
 $app->configure('auth');
 $app->configure('fractal');
+$app->configure('permission');
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,8 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
+    'role' => Spatie\Permission\Middlewares\RoleMiddleware::class,
 ]);
 
 /*
@@ -85,6 +88,7 @@ if ($app->environment() !== 'production') {
 }
 
 $app->register(Prettus\Repository\Providers\RepositoryServiceProvider::class);
+$app->register(Spatie\Permission\PermissionServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
