@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
+    use SeederHelper;
     /**
      * Run the database seeds.
      *
@@ -19,5 +20,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         factory(User::class, 50)->create();
+
+        $this->seederPermission(User::PERMISSIONS);
     }
 }

@@ -20,7 +20,7 @@ $router->group([
 ], function () use ($router) {
 
     $router->group([
-        'namespace' => 'Auth',
+        'namespace' => 'Backend\Auth',
         'prefix' => 'user',
     ], function () use ($router) {
 

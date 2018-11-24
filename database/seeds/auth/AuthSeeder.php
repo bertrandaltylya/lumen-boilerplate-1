@@ -11,7 +11,7 @@ class AuthSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('UsersTableSeeder');
         $this->call('RolesSeeder');
+        $this->call('UsersTableSeeder');
     }
 }
