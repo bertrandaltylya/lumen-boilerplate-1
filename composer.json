@@ -17,6 +17,7 @@
   "require-dev": {
     "appzcoder/lumen-routes-list": "^1.0",
     "barryvdh/laravel-ide-helper": "^2.5",
+    "doctrine/dbal": "^2.8",
     "fzaninotto/faker": "~1.4",
     "league/flysystem": "^1.0",
     "mockery/mockery": "~1.0",
@@ -43,6 +44,11 @@
     "clear-all": [
       "@php artisan cache:clear",
       "composer dump-autoload --no-interaction --ansi --verbose --optimize"
+    ],
+    "ide-helper": [
+      "@php artisan ide-helper:generate",
+      "@php artisan ide-helper:meta",
+      "@php artisan ide-helper:models"
     ]
   },
   "config": {
