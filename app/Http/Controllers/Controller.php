@@ -35,7 +35,7 @@ class Controller extends BaseController
 
     /**
      * @param $data
-     * @return string
+     * @return string|null
      * @throws \ReflectionException
      */
     private function _getResourceKey($data)
@@ -47,7 +47,9 @@ class Controller extends BaseController
         } else {
             $model = $data;
         }
-
+        if (empty($model)) {
+            return null;
+        }
         if (isset($model->resourceKey)) {
             $resourceKey = $model->resourceKey;
         } else {

@@ -21,10 +21,11 @@ class UserTransformer extends BaseTransformer
     public function transform(User $user)
     {
         $response = [
-            'id' => $user->id,
+            'id' => $user->getHashedId(),
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
+            'real_id' => $user->id,
         ];
 
         return $this->addTimesHumanReadable($user, $response);

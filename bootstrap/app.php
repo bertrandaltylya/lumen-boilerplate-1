@@ -30,6 +30,7 @@ $app->configure('fractal');
 $app->configure('permission');
 $app->configure('repository');
 $app->configure('settings');
+$app->configure('hashids');
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,7 @@ if ($app->environment() !== 'production') {
 
 $app->register(Prettus\Repository\Providers\RepositoryServiceProvider::class);
 $app->register(Spatie\Permission\PermissionServiceProvider::class);
+$app->register(Vinkla\Hashids\HashidsServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

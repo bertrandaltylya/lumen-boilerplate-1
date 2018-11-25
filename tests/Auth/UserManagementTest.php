@@ -36,7 +36,7 @@ class UserManagementTest extends TestCase
             $param = $this->_userData();
         } elseif ($method == 'get' && $uri == 'user/{userId}') {
             $user = factory(User::class)->create();
-            $uri = 'user/'.$user->id;
+            $uri = 'user/'.$user->getHashedId();
         }
 
         $this->call($method, $uri, $param);

@@ -32,13 +32,13 @@ class UsersController extends Controller
     }
 
     /**
-     * @param string $userId
+     * @param \Illuminate\Http\Request $request
      * @return \Spatie\Fractalistic\Fractal
      * @throws \ReflectionException
      */
-    public function show(string $userId)
+    public function show(Request $request)
     {
-        return $this->transform($this->userRepository->find($userId), new UserTransformer);
+        return $this->transform($this->userRepository->firstOrFailedByHashedId($request->id), new UserTransformer);
     }
 
     /**

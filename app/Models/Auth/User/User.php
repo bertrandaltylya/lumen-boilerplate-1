@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth\User;
 
+use App\Models\Traits\HashIdTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -18,6 +19,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use HasApiTokens;
     use HasRoles;
     use SoftDeletes;
+    use HashIdTrait;
 
     /**
      * all permissions
