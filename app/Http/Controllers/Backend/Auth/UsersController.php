@@ -27,4 +27,14 @@ class UsersController extends Controller
     {
         return $this->transform($this->userRepository->paginate(), new UserTransformer);
     }
+
+    /**
+     * @param string $userId
+     * @return \Spatie\Fractalistic\Fractal
+     * @throws \ReflectionException
+     */
+    public function show(string $userId)
+    {
+        return $this->transform($this->userRepository->find($userId), new UserTransformer);
+    }
 }

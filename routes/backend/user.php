@@ -4,4 +4,5 @@ $router->group([
     'prefix' => 'user',
 ], function () use ($router) {
     $router->get('/', 'UsersController@index');
+    $router->get('/{userId}', 'UsersController@show');
 });
