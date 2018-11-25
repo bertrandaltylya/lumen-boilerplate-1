@@ -19,8 +19,12 @@ class UsersController extends Controller
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @return \Spatie\Fractalistic\Fractal
+     * @throws \ReflectionException
+     */
     public function index()
     {
-        return fractal($this->userRepository->paginate(), new UserTransformer())->respond();
+        return $this->transform($this->userRepository->paginate(), new UserTransformer);
     }
 }
