@@ -8,6 +8,7 @@
 
 namespace App\Transformers;
 
+use Illuminate\Support\Carbon;
 use League\Fractal\TransformerAbstract;
 
 abstract class BaseTransformer extends TransformerAbstract
@@ -18,13 +19,13 @@ abstract class BaseTransformer extends TransformerAbstract
      * @param $entity
      * @param $responseData
      * @param array $columns
+     * @param bool $isIncludeDefault
      * @return array
-     * @author lloricode@gmail.com
      */
-    public function addTimesHumanReadable($entity, $responseData, array $columns = []): array
+    public function addTimesHumanReadable($entity, $responseData, array $columns = [], $isIncludeDefault = true): array
     {
-
         $auth = app('auth');
+
         if (! $auth->check()) {
             return $responseData;
         }
@@ -33,12 +34,13 @@ abstract class BaseTransformer extends TransformerAbstract
             return $responseData;
         }
 
-        $return = [];
-
-        $timeZone = $auth->check() ? $auth->user()->timezone : config('app.timezone');
+        $defaultTimeZone = config('app.timezone');
+        $timeZone = $auth->check() ? ($auth->user()->timezone ?? $defaultTimeZone) : $defaultTimeZone;
 
         $readable = function ($column) use ($entity, $timeZone) {
-            $at = $entity->{$column};
+
+            // sometime column is not carbonated, i mean instance if Carbon/Carbon
+            $at = Carbon::parse($entity->{$column});
 
             return [
                 $column => $at->format(config('settings.formats.datetime_12')),
@@ -48,14 +50,24 @@ abstract class BaseTransformer extends TransformerAbstract
             ];
         };
 
-        if (count($columns) > 0) {
-            foreach ($columns as $column) {
-                $return = array_merge($return, $readable($column));
-            }
-        } else {
-            foreach (['created_at', 'updated_at', 'deleted_at'] as $column) {
-                $return = array_merge($return, (! is_null($entity->{$column})) ? array_merge($return, $readable($column)) : []);
-            }
+        $isHasCustom = count($columns) > 0;
+
+        $defaults = ['created_at', 'updated_at', 'deleted_at'];
+
+        // only custom
+        if ($isHasCustom && ! $isIncludeDefault) {
+            $toBeConvert = $columns;
+        }  // custom and defaults
+        elseif ($isHasCustom && $isIncludeDefault) {
+            $toBeConvert = array_merge($columns, $defaults);
+        } // only defaults
+        else {
+            $toBeConvert = $defaults;
+        }
+
+        $return = [];
+        foreach ($toBeConvert as $column) {
+            $return = array_merge($return, (! is_null($entity->{$column})) ? array_merge($return, $readable($column)) : []);
         }
 
         return array_merge($responseData, $return);
