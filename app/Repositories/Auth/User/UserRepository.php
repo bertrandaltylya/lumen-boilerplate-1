@@ -10,6 +10,7 @@ namespace App\Repositories\Auth\User;
 
 use App\Models\Auth\User\User;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository extends BaseRepository
 {
@@ -21,5 +22,12 @@ class UserRepository extends BaseRepository
     public function model()
     {
         return User::class;
+    }
+
+    public function create(array $attributes)
+    {
+        $attributes['password'] = Hash::make($attributes['password']);
+
+        return parent::create($attributes);
     }
 }

@@ -19,5 +19,10 @@ $router->group([
     'middleware' => 'auth',
 ], function () use ($router) {
 
-    include 'backend/user.php';
+    $router->group([
+        'namespace' => 'Backend',
+    ], function () use ($router) {
+
+        include 'backend/user.php';
+    });
 });

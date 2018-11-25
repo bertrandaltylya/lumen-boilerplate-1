@@ -2,6 +2,8 @@
 
 namespace Tests;
 
+use App\Models\Auth\User\User;
+
 class UserManagementTest extends TestCase
 {
     /**
@@ -13,12 +15,46 @@ class UserManagementTest extends TestCase
      *                  ["user", 403]
      *                  ["", 401]
      */
-    public function canAccessIndex($roleName, $statusCode)
+    public function access($roleName, $statusCode)
     {
         if (! empty($roleName)) {
             $this->loggedInAs($roleName);
         }
-        $this->get('/user');
-        $this->assertResponseStatus($statusCode);
+
+        $user = factory(User::class)->create();
+
+        $endpoints = [
+            [
+                'm' => 'post',
+                'uri' => 'user',
+            ],
+            [
+                'm' => 'get',
+                'uri' => 'user',
+            ],
+            [
+                'm' => 'get',
+                'uri' => 'user/'.$user->id,
+            ],
+        ];
+
+        foreach ($endpoints as $endpoint) {
+            $param = [];
+            if ($endpoint['m'] == 'post' && $endpoint['uri'] == 'user') {
+                $param = $this->_userData();
+            }
+            $this->call($endpoint['m'], $endpoint['uri'], $param);
+            $this->assertResponseStatus($statusCode);
+        }
+    }
+
+    private function _userData()
+    {
+        return [
+            'first_name' => 'Lloric',
+            'last_name' => 'Garcia',
+            'email' => 'lloricode@gmail.com',
+            'password' => app('hash')->make('secret'),
+        ];
     }
 }
