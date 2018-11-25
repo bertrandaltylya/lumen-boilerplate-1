@@ -56,6 +56,12 @@
     "ide-helper": [
       "@php artisan ide-helper:generate",
       "@php artisan ide-helper:meta"
+    ],
+    "coverage": [
+      "./vendor/bin/phpunit --coverage-html ./coverage"
+    ],
+    "coverage-txt": [
+      "./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover"
     ]
   },
   "config": {
