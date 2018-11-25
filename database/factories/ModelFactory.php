@@ -12,13 +12,12 @@
 */
 
 use App\Models\Auth\User\User;
-use Illuminate\Support\Facades\Hash;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->email,
-        'password' => Hash::make($faker->password),
+        'password' => app('hash')->make($faker->password),
     ];
 });
