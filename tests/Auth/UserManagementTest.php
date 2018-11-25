@@ -7,45 +7,40 @@ use App\Models\Auth\User\User;
 class UserManagementTest extends TestCase
 {
     /**
+     * @param $method
+     * @param $uri
      * @param $roleName
      * @param $statusCode
      * @test
-     * @testWith        ["system", 200]
-     *                  ["admin", 200]
-     *                  ["user", 403]
-     *                  ["", 401]
+     * @testWith        ["post", "user", "system", 200]
+     *                  ["get", "user", "system", 200]
+     *                  ["get", "user/{userId}", "system", 200]
+     *                  ["post", "user", "admin", 200]
+     *                  ["get", "user", "admin", 200]
+     *                  ["get", "user/{userId}", "admin", 200]
+     *                  ["post", "user", "user", 403]
+     *                  ["get", "user", "user", 403]
+     *                  ["get", "user/{userId}", "user", 403]
+     *                  ["post", "user", "", 401]
+     *                  ["get", "user", "", 401]
+     *                  ["get", "user/{userId}", "", 401]
      */
-    public function access($roleName, $statusCode)
+    public function access($method, $uri, $roleName, $statusCode)
     {
         if (! empty($roleName)) {
             $this->loggedInAs($roleName);
         }
 
-        $user = factory(User::class)->create();
-
-        $endpoints = [
-            [
-                'm' => 'post',
-                'uri' => 'user',
-            ],
-            [
-                'm' => 'get',
-                'uri' => 'user',
-            ],
-            [
-                'm' => 'get',
-                'uri' => 'user/'.$user->id,
-            ],
-        ];
-
-        foreach ($endpoints as $endpoint) {
-            $param = [];
-            if ($endpoint['m'] == 'post' && $endpoint['uri'] == 'user') {
-                $param = $this->_userData();
-            }
-            $this->call($endpoint['m'], $endpoint['uri'], $param);
-            $this->assertResponseStatus($statusCode);
+        $param = [];
+        if ($method == 'post' && $uri == 'user') {
+            $param = $this->_userData();
+        } elseif ($method == 'get' && $uri == 'user/{userId}') {
+            $user = factory(User::class)->create();
+            $uri = 'user/'.$user->id;
         }
+
+        $this->call($method, $uri, $param);
+        $this->assertResponseStatus($statusCode);
     }
 
     private function _userData()
