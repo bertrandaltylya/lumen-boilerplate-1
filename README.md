@@ -20,8 +20,8 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 * [laravel/lumen-framework:5.7.*](https://github.com/laravel/lumen-framework) - The stunningly fast micro-framework by Laravel
 * [laravel/passport](https://github.com/laravel/passport) - API Authentication
 * [andersao/l5-repository](https://github.com/andersao/l5-repository) - Repositories to abstract the database layer
-* [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal) - Make response standard
-* [spatie/laravel-permission](https://github.com/spatie/laravel-permission) - Associate users with roles and permissions *[TODO]*
+* [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal) - Presentation and transformation layer for complex data output
+* [spatie/laravel-permission](https://github.com/spatie/laravel-permission) - Associate users with roles and permissions
 
 
 See also the list of [contributors](https://github.com/lloricode/lumen-boilerplate/graphs/contributors) who participated in this project.
