@@ -68,4 +68,21 @@ class UserManagementTest extends TestCase
         $this->get(route('backend.user.show', ['id' => $id]));
         $this->assertResponseStatus(404);
     }
+
+    /**
+     * @test
+     */
+    public function getNoneExistedUser()
+    {
+        $this->loggedInAs();
+
+        $user = factory(User::class)->create();
+
+        $hashedId = $user->getHashedId();
+
+        $user->delete();
+
+        $this->get(route('backend.user.show', ['id' => $hashedId]));
+        $this->assertResponseStatus(404);
+    }
 }
