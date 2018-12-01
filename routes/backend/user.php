@@ -2,8 +2,18 @@
 $router->group([
     'namespace' => 'Auth',
     'prefix' => 'user',
+    'as' => 'user',
 ], function () use ($router) {
-    $router->get('/', 'UsersController@index');
-    $router->post('/', 'UsersController@create');
-    $router->get('/{id}', 'UsersController@show');
+    $router->get('/', [
+        'as' => 'index',
+        'uses' => 'UsersController@index',
+    ]);
+    $router->post('/', [
+        'as' => 'store',
+        'uses' => 'UsersController@create',
+    ]);
+    $router->get('/{id}', [
+        'as' => 'show',
+        'uses' => 'UsersController@show',
+    ]);
 });

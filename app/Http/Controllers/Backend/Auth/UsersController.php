@@ -37,6 +37,7 @@ class UsersController extends Controller
 
     /**
      * @return \Spatie\Fractalistic\Fractal
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @throws \ReflectionException
      */
     public function show()

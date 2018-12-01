@@ -10,8 +10,12 @@ namespace App\Models\Traits;
 
 trait HashIdTrait
 {
-    public function getHashedId()
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getHashedId(string $key = 'id')
     {
-        return app('hashids')->encode($this->id);
+        return app('hashids')->encode($this->{$key});
     }
 }

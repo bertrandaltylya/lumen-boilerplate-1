@@ -21,6 +21,7 @@ $router->group([
 
     $router->group([
         'namespace' => 'Backend',
+        'as' => 'backend',
     ], function () use ($router) {
 
         include 'backend/user.php';

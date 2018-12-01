@@ -52,4 +52,20 @@ class UserManagementTest extends TestCase
             'password' => app('hash')->make('secret'),
         ];
     }
+
+    /**
+     * @test
+     */
+    public function getUserWithWrongHashedId()
+    {
+        $this->loggedInAs();
+
+        $hashedId = factory(User::class)->create()->getHashedId();
+
+        // remove last char
+        $id = substr($hashedId, 0, strlen($hashedId) - 1);
+
+        $this->get(route('backend.user.show', ['id' => $id]));
+        $this->assertResponseStatus(404);
+    }
 }

@@ -30,13 +30,17 @@ abstract class BaseRepository extends BaseRepo implements CacheableInterface
         // https://github.com/laravel/lumen-framework/issues/685#issuecomment-443393222
         $hashedId = app('request')->route()[2][$key];
 
-        $id = app('hashids')->decode($hashedId)[0];
+        $id = app('hashids')->decode($hashedId);
 
-        $this->pushCriteria(new ThisWhereEqualsCriteria('id', $id));
+        if (empty($id)) {
+            throw new ModelNotFoundException;
+        }
+
+        $this->pushCriteria(new ThisWhereEqualsCriteria('id', $id[0]));
 
         $entity = $this->first($columns);
         if (is_null($entity)) {
-            throw  new ModelNotFoundException;
+            throw new ModelNotFoundException;
         }
 
         return $entity;
