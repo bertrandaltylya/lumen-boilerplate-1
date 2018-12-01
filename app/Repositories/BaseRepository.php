@@ -17,9 +17,13 @@ abstract class BaseRepository extends BaseRepo implements CacheableInterface
 {
     use CacheableRepository;
 
-    public function firstOrFailedByHashedId($id, $columns = ['*'])
+    public function firstOrFailedByHashedId(string $key = 'id', $columns = ['*'])
     {
-        $entity = parent::find(app('hashids')->decode($id), $columns)->first();
+        // https://github.com/laravel/lumen-framework/issues/685#issuecomment-350376018
+        // https://github.com/laravel/lumen-framework/issues/685#issuecomment-443393222
+        $hashedId = app('request')->route()[2][$key];
+
+        $entity = parent::find(app('hashids')->decode($hashedId), $columns)->first();
         if (is_null($entity)) {
             throw  new ModelNotFoundException;
         }
