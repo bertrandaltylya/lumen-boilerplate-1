@@ -13,6 +13,12 @@ use App\Repositories\BaseRepository;
 
 class UserRepository extends BaseRepository
 {
+    protected $fieldSearchable = [
+        'first_name' => 'like',
+        'last_name' => 'like',
+        'email' => 'like',
+    ];
+
     /**
      * Specify Model class name
      *

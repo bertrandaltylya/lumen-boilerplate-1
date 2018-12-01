@@ -14,6 +14,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $system = factory(User::class)->create([
+            'first_name' => 'System',
+            'last_name' => 'Root',
             'email' => 'system@system.com',
             'password' => app('hash')->make('secret'),
         ]);

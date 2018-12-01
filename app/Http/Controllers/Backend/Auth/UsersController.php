@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 class UsersController extends Controller
 {
@@ -23,11 +24,14 @@ class UsersController extends Controller
     }
 
     /**
+     * @param \Illuminate\Http\Request $request
      * @return \Spatie\Fractalistic\Fractal
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @throws \ReflectionException
      */
-    public function index()
+    public function index(Request $request)
     {
+        $this->userRepository->pushCriteria(new RequestCriteria($request));
         return $this->transform($this->userRepository->paginate(), new UserTransformer);
     }
 
