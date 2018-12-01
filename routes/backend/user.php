@@ -1,19 +1,19 @@
 <?php
 $router->group([
-    'namespace' => 'Auth',
+    'namespace' => 'Auth\User',
     'prefix' => 'user',
     'as' => 'user',
 ], function () use ($router) {
     $router->get('/', [
         'as' => 'index',
-        'uses' => 'UsersController@index',
+        'uses' => 'UserController@index',
     ]);
     $router->post('/', [
         'as' => 'store',
-        'uses' => 'UsersController@create',
+        'uses' => 'UserController@create',
     ]);
     $router->get('/{id}', [
         'as' => 'show',
-        'uses' => 'UsersController@show',
+        'uses' => 'UserController@show',
     ]);
 });

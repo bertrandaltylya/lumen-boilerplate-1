@@ -12,10 +12,10 @@ class UserManagementTest extends TestCase
      * @param $roleName
      * @param $statusCode
      * @test
-     * @testWith        ["post", "user", "system", 200]
+     * @testWith        ["post", "user", "system", 201]
      *                  ["get", "user", "system", 200]
      *                  ["get", "user/{id}", "system", 200]
-     *                  ["post", "user", "admin", 200]
+     *                  ["post", "user", "admin", 201]
      *                  ["get", "user", "admin", 200]
      *                  ["get", "user/{id}", "admin", 200]
      *                  ["post", "user", "user", 403]

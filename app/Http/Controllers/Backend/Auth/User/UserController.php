@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Auth;
+namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
@@ -8,7 +8,7 @@ use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     protected $userRepository;
 
@@ -32,6 +32,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $this->userRepository->pushCriteria(new RequestCriteria($request));
+
         return $this->transform($this->userRepository->paginate(), new UserTransformer);
     }
 
@@ -47,12 +48,12 @@ class UsersController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @return \Spatie\Fractalistic\Fractal
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      * @throws \ReflectionException
      */
     public function create(Request $request)
     {
-        return $this->transform($this->userRepository->create($request->all()), new UserTransformer);
+        return $this->created($this->transform($this->userRepository->create($request->all()), new UserTransformer));
     }
 }
