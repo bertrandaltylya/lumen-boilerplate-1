@@ -20,8 +20,10 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 - [TODO]: endpoints of this boilerplate later to add
 
 ## Running the tests
-
-*[TODO]*
+- go to project directory.
+- run `vendor/bin/phpunit`
+- `composer coverage` to see code coverage via `html`.
+- `composer -txt` to see code coverage via `terminal`.
 
 
 ## Built With
