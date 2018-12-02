@@ -25,8 +25,11 @@ class UserTransformer extends BaseTransformer
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
-            'real_id' => $user->id,
         ];
+
+        $response = $this->filterData($response, [
+            'real_id' => $user->id,
+        ]);
 
         return $this->addTimesHumanReadable($user, $response);
     }

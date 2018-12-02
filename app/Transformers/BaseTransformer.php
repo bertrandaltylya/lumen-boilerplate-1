@@ -14,6 +14,21 @@ use League\Fractal\TransformerAbstract;
 abstract class BaseTransformer extends TransformerAbstract
 {
     /**
+     * @param array $response
+     * @param array $data
+     * @param array $roleNames
+     * @return array
+     */
+    public function filterData(array $response, array $data, array $roleNames = ['system']): array
+    {
+        if (app('auth')->user()->hasAnyRole($roleNames)) {
+            return array_merge($response, $data);
+        }
+
+        return $response;
+    }
+
+    /**
      * prepare human readable time with users timezone
      *
      * @param $entity
