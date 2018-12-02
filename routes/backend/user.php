@@ -20,4 +20,18 @@ $router->group([
         'as' => 'update',
         'uses' => 'UserController@update',
     ]);
+    $router->delete('/{id}', [
+        'as' => 'destroy',
+        'uses' => 'UserController@destroy',
+    ]);
+
+    // status
+    $router->put('/{id}/restore', [
+        'as' => 'restore',
+        'uses' => 'UserStatusController@restore',
+    ]);
+    $router->put('/{id}/purge', [
+        'as' => 'purge',
+        'uses' => 'UserStatusController@purge',
+    ]);
 });

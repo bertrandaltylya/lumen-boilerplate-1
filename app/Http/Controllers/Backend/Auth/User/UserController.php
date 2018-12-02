@@ -20,6 +20,7 @@ class UserController extends Controller
         $this->middleware('permission:'.$permissions['create'], ['only' => 'create']);
         $this->middleware('permission:'.$permissions['show'], ['only' => 'show']);
         $this->middleware('permission:'.$permissions['update'], ['only' => 'update']);
+        $this->middleware('permission:'.$permissions['destroy'], ['only' => 'destroy']);
 
         $this->userRepository = $userRepository;
     }
@@ -74,5 +75,10 @@ class UserController extends Controller
         ]));
 
         return $this->transform($user, new UserTransformer);
+    }
+
+    public function destroy()
+    {
+        return $this->noContent();
     }
 }
