@@ -13,7 +13,7 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 - run `composer install` to install project dependencies.
 - copy `.env.example` to `.env`. (dont just rename it), for team reference purpose.
 - prepare you environment in `.env`
-- lumen has no `php artisan key:generate`, so you can google it to add value first.
+- lumen has no `php artisan key:generate`, so you can [google](https://google.com/search?q=how+to+add+APP_KEY+in+lumen) it to add value first.
 - run `composer fresh`, this will migrate and seed fake data to your database, and install laravel passport. see composer.json `scripts` index.
 - if you not familiar with  [laravel/passport](https://github.com/laravel/passport), you must see  [this](https://github.com/laravel/passport) first.
 - how to login? see [laravel/passport](https://github.com/laravel/passport)
