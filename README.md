@@ -1,4 +1,4 @@
-# Lumen Boilerplate
+# Lumen 5.7 Boilerplate
 
 [![Build Status](https://travis-ci.org/lloricode/lumen-boilerplate.svg?branch=master)](https://travis-ci.org/lloricode/lumen-boilerplate)
 
