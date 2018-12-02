@@ -21,6 +21,7 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 - [TODO]: endpoints of this boilerplate later to add
 
 ## Running the tests
+- you can view integration [here](https://travis-ci.org/lloricode/lumen-boilerplate)
 - go to project directory.
 - run `vendor/bin/phpunit`, if you running this via `homestad`, you can run this through `ssh` via `phpunit` in current project directory.
 - `composer coverage` to see code coverage via `html`.
