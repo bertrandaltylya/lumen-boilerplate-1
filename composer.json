@@ -1,10 +1,11 @@
 {
-  "name": "laravel/lumen",
-  "description": "The Laravel Lumen Framework.",
+  "name": "lloricode/lumen-boilerplate",
+  "description": "The Lumen boilerplate project.",
   "keywords": [
     "framework",
     "laravel",
-    "lumen"
+    "lumen",
+    "boilerplate"
   ],
   "license": "MIT",
   "type": "project",
