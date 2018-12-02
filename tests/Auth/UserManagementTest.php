@@ -35,7 +35,7 @@ class UserManagementTest extends TestCase
         if ($method === 'post' && $uri === 'user') {
             $param = $this->_userData();
         } elseif ($method === 'get' && $uri === 'user/{id}') {
-            $user = factory(User::class)->create($this->_userData());
+            $user = factory(User::class)->create();
             $uri = 'user/'.$user->getHashedId();
         }
 
@@ -43,7 +43,7 @@ class UserManagementTest extends TestCase
         $this->assertResponseStatus($statusCode);
     }
 
-    private function _userData()
+    private function _userData(): array
     {
         return [
             'first_name' => 'Lloric',
@@ -84,5 +84,41 @@ class UserManagementTest extends TestCase
 
         $this->get(route('backend.user.show', ['id' => $hashedId]));
         $this->assertResponseStatus(404);
+    }
+
+    /**
+     * @test
+     */
+    public function createUser()
+    {
+        $this->loggedInAs();
+
+        $this->post(route('backend.user.store'), $this->_userData());
+        $this->assertResponseStatus(201);
+
+        $data = $this->_userData();
+        unset($data['password']);
+
+        $this->seeInDatabase((new User)->getTable(), $data);
+        $this->seeJson($data);
+    }
+
+    /**
+     * @test
+     */
+    public function updateUser()
+    {
+        $this->loggedInAs();
+
+        $user = factory(User::class)->create();
+
+        $this->post(route('backend.user.update', ['id' => $user->getHashedId()]), $this->_userData());
+        $this->assertResponseOk();
+
+        $data = $this->_userData();
+        unset($data['password']);
+
+        $this->seeInDatabase((new User)->getTable(), array_merge($data, ['id' => $user->id]));
+        $this->seeJson(array_merge($data, ['real_id' => $user->id]));
     }
 }

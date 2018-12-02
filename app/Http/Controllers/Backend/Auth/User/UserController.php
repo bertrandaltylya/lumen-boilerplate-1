@@ -56,4 +56,22 @@ class UserController extends Controller
     {
         return $this->created($this->transform($this->userRepository->create($request->all()), new UserTransformer));
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Spatie\Fractalistic\Fractal
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @throws \ReflectionException
+     */
+    public function update(Request $request)
+    {
+        $user = $this->userRepository->updateByHashedId($request->only([
+            'first_name',
+            'last_name',
+            'email',
+            'password',
+        ]));
+
+        return $this->transform($user, new UserTransformer);
+    }
 }

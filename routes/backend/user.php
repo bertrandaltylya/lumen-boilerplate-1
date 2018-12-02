@@ -16,4 +16,8 @@ $router->group([
         'as' => 'show',
         'uses' => 'UserController@show',
     ]);
+    $router->post('/{id}/edit', [
+        'as' => 'update',
+        'uses' => 'UserController@update',
+    ]);
 });
