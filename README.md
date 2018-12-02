@@ -21,7 +21,7 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 
 ## Running the tests
 - go to project directory.
-- run `vendor/bin/phpunit`
+- run `vendor/bin/phpunit`, if you running this via `homestad`, you can run this through `ssh` via `phpunit` in current project directory.
 - `composer coverage` to see code coverage via `html`.
 - `composer -txt` to see code coverage via `terminal`.
 
