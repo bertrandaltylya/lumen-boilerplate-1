@@ -20,6 +20,9 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 - how to login? see [laravel/passport](https://github.com/laravel/passport)
 - [TODO]: endpoints of this boilerplate later to add
 
+### Available Endpoints
+[TODO]
+
 ## Running the tests
 - you can view integration [here](https://travis-ci.org/lloricode/lumen-boilerplate)
 - go to project directory.
