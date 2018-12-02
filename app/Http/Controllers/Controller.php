@@ -8,4 +8,5 @@ class Controller extends BaseController
 {
     use Traits\ResponseTrait;
     use Traits\TransformerTrait;
+    use Traits\Hashable;
 }
