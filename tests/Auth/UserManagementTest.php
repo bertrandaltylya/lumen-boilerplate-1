@@ -66,7 +66,7 @@ class UserManagementTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        $this->post(route('backend.user.update', ['id' => $user->getHashedId()]), $this->userData());
+        $this->put(route('backend.user.update', ['id' => $user->getHashedId()]), $this->userData());
         $this->assertResponseOk();
 
         $data = $this->userData();

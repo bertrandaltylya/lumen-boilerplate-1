@@ -19,6 +19,7 @@ class UserController extends Controller
         $this->middleware('permission:'.$permissions['index'], ['only' => 'index']);
         $this->middleware('permission:'.$permissions['create'], ['only' => 'create']);
         $this->middleware('permission:'.$permissions['show'], ['only' => 'show']);
+        $this->middleware('permission:'.$permissions['update'], ['only' => 'update']);
 
         $this->userRepository = $userRepository;
     }

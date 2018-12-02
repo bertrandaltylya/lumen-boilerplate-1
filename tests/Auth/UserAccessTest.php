@@ -19,18 +19,7 @@ class UserAccessTest extends TestCase
      * @param $roleName
      * @param $statusCode
      * @test
-     * @testWith        ["post", "user", "system", 201]
-     *                  ["get", "user", "system", 200]
-     *                  ["get", "user/{id}", "system", 200]
-     *                  ["post", "user", "admin", 201]
-     *                  ["get", "user", "admin", 200]
-     *                  ["get", "user/{id}", "admin", 200]
-     *                  ["post", "user", "user", 403]
-     *                  ["get", "user", "user", 403]
-     *                  ["get", "user/{id}", "user", 403]
-     *                  ["post", "user", "", 401]
-     *                  ["get", "user", "", 401]
-     *                  ["get", "user/{id}", "", 401]
+     * @dataProvider dataResources
      */
     public function access($method, $uri, $roleName, $statusCode)
     {
@@ -42,11 +31,39 @@ class UserAccessTest extends TestCase
         if ($method === 'post' && $uri === 'user') {
             $param = $this->userData();
         } elseif ($method === 'get' && $uri === 'user/{id}') {
-            $user = factory(User::class)->create();
-            $uri = 'user/'.$user->getHashedId();
+            $uri = str_replace('{id}', factory(User::class)->create()->getHashedId(), $uri);
+        } elseif ($method === 'put' && $uri === 'user/{id}/edit') {
+            $uri = str_replace('{id}', factory(User::class)->create()->getHashedId(), $uri);
+            $param = $this->userData();
         }
 
         $this->call($method, $uri, $param);
         $this->assertResponseStatus($statusCode);
+    }
+
+    public function dataResources(): array
+    {
+        return [
+            // system
+            'store by system' => ['post', 'user', 'system', 201],
+            'index by system' => ['get', 'user', 'system', 200],
+            'show by system' => ['get', 'user/{id}', 'system', 200],
+            'update by system' => ['put', 'user/{id}/edit', 'system', 200],
+            // admin
+            'store by admin' => ['post', 'user', 'admin', 201],
+            'index by admin' => ['get', 'user', 'admin', 200],
+            'show by admin' => ['get', 'user/{id}', 'admin', 200],
+            'update by admin' => ['put', 'user/{id}/edit', 'admin', 200],
+            // user none role
+            'store by none role' => ['post', 'user', 'user', 403],
+            'index by none role' => ['get', 'user', 'user', 403],
+            'show by none role' => ['get', 'user/{id}', 'user', 403],
+            'update by none role' => ['put', 'user/{id}/edit', 'user', 403],
+            // guest
+            'store by guest' => ['post', 'user', '', 401],
+            'index by guest' => ['get', 'user', '', 401],
+            'show by guest' => ['get', 'user/{id}', '', 401],
+            'update by guest' => ['put', 'user/{id}/edit', '', 401],
+        ];
     }
 }
