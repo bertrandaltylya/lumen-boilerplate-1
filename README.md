@@ -27,8 +27,8 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 - you can view integration [here](https://travis-ci.org/lloricode/lumen-boilerplate)
 - go to project directory.
 - run `vendor/bin/phpunit`, if you running this via [homestead](https://laravel.com/docs/5.7/homestead), you can run this through `ssh` via `phpunit` in current project directory.
-- `composer coverage` to see code coverage via `html`.
-- `composer -txt` to see code coverage via `terminal`.
+- run `composer coverage` to see code coverage via `html`.
+- run `composer coverage-txt` to see code coverage via `terminal`.
 
 
 ## Built With
