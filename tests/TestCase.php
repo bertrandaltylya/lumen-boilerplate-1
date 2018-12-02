@@ -41,4 +41,14 @@ abstract class TestCase extends BaseTestCase
 
         return $user;
     }
+
+    protected function userData(): array
+    {
+        return [
+            'first_name' => 'Lloric',
+            'last_name' => 'Garcia',
+            'email' => 'lloricode@gmail.com',
+            'password' => app('hash')->make('secret'),
+        ];
+    }
 }
