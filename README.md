@@ -11,10 +11,10 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 - after cloning/downloding this repo, first open to terminal then change directory to a project directory.
 - sample, in linux, `cd lumen-boilerplate`.
 - run `composer install` to install project dependencies.
-- copy `.env.example` to `.env`. (dont just rename it), for team refence porpose.
+- copy `.env.example` to `.env`. (dont just rename it), for team reference purpose.
 - prepare you environment in `.env`
 - lumen has no `php artisan key:generate`, so you can google it to add value first.
-- run `composer fresh`, this with migrate and seed to your database, and install laravel passport. see composer.json `scripts` index.
+- run `composer fresh`, this will migrate and seed fake data to your database, and install laravel passport. see composer.json `scripts` index.
 - if you not familiar with  [laravel/passport](https://github.com/laravel/passport), you must see  [this](https://github.com/laravel/passport) first.
 - how to login? see [laravel/passport](https://github.com/laravel/passport)
 - [TODO]: endpoints of this boilerplate later to add
