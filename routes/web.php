@@ -12,7 +12,10 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return [
+        'name' => config('app.name'),
+        'version' => 'dev-master',
+    ];
 });
 
 $router->group([
