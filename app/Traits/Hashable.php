@@ -6,7 +6,7 @@
  * Time: 4:27 PM
  */
 
-namespace App\Http\Controllers\Traits;
+namespace App\Traits;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -31,5 +31,14 @@ trait Hashable
         }
 
         return $keyColumnValue[0];
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getHashedId(string $key = 'id')
+    {
+        return app('hashids')->encode($this->{$key});
     }
 }
