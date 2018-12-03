@@ -23,7 +23,7 @@ class UserAccessTest extends TestCase
      */
     public function access($method, $uri, $roleName, $statusCode)
     {
-        if (! empty($roleName)) {
+        if (!empty($roleName)) {
             $this->loggedInAs($roleName);
         }
 

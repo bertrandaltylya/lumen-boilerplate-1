@@ -13,7 +13,7 @@ trait SeederHelper
             ]);
             Role::findByName('system')->givePermissionTo($permission);
             if ($isAddToAdminRole) {
-                if (! in_array($permissionName, $except)) {
+                if (!in_array($permissionName, $except)) {
                     Role::findByName('admin')->givePermissionTo($permission);
                 }
             }

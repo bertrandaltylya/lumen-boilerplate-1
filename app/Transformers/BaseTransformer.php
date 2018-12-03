@@ -41,11 +41,11 @@ abstract class BaseTransformer extends TransformerAbstract
     {
         $auth = app('auth');
 
-        if (! $auth->check()) {
+        if (!$auth->check()) {
             return $responseData;
         }
 
-        if (! $auth->user()->hasAnyRole(['admin', 'system'])) {
+        if (!$auth->user()->hasAnyRole(['admin', 'system'])) {
             return $responseData;
         }
 
@@ -59,9 +59,9 @@ abstract class BaseTransformer extends TransformerAbstract
 
             return [
                 $column => $at->format(config('settings.formats.datetime_12')),
-                $column.'_readable' => $at->diffForHumans(),
-                $column.'_tz' => $at->timezone($timeZone)->format(config('settings.formats.datetime_12')),
-                $column.'_readable_tz' => $at->timezone($timeZone)->diffForHumans(),
+                $column . '_readable' => $at->diffForHumans(),
+                $column . '_tz' => $at->timezone($timeZone)->format(config('settings.formats.datetime_12')),
+                $column . '_readable_tz' => $at->timezone($timeZone)->diffForHumans(),
             ];
         };
 
@@ -70,7 +70,7 @@ abstract class BaseTransformer extends TransformerAbstract
         $defaults = ['created_at', 'updated_at', 'deleted_at'];
 
         // only custom
-        if ($isHasCustom && ! $isIncludeDefault) {
+        if ($isHasCustom && !$isIncludeDefault) {
             $toBeConvert = $columns;
         }  // custom and defaults
         elseif ($isHasCustom && $isIncludeDefault) {
@@ -82,7 +82,8 @@ abstract class BaseTransformer extends TransformerAbstract
 
         $return = [];
         foreach ($toBeConvert as $column) {
-            $return = array_merge($return, (! is_null($entity->{$column})) ? array_merge($return, $readable($column)) : []);
+            $return = array_merge($return,
+                (!is_null($entity->{$column})) ? array_merge($return, $readable($column)) : []);
         }
 
         return array_merge($responseData, $return);

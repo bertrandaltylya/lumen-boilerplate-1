@@ -16,14 +16,14 @@ trait UsesDatabase
     protected static $migrated = false;
 
     /** @var string */
-    protected $database = __DIR__.'/../database/database.sqlite';
+    protected $database = __DIR__ . '/../database/database.sqlite';
 
     public function prepareDatabase($force = false)
     {
         // The database needs to be deleted before the application gets boted
         // to avoid having the database in a weird read-only state.
 
-        if (! $force && static::$migrated) {
+        if (!$force && static::$migrated) {
             return;
         }
 
