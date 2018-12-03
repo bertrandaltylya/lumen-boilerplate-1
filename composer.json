@@ -22,7 +22,6 @@
   "require-dev": {
     "appzcoder/lumen-routes-list": "^1.0",
     "barryvdh/laravel-ide-helper": "^2.5",
-    "codedungeon/phpunit-result-printer": "^0.23.4",
     "doctrine/dbal": "^2.8",
     "fzaninotto/faker": "~1.4",
     "league/flysystem": "^1.0",
