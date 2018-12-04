@@ -75,4 +75,22 @@ class UserManagementTest extends TestCase
         $this->seeInDatabase((new User)->getTable(), array_merge($data, ['id' => $user->id]));
         $this->seeJson(array_merge($data, ['real_id' => $user->id]));
     }
+
+    /**
+     * @test
+     */
+    public function destroyUser()
+    {
+        $this->loggedInAs();
+
+        $user = factory(User::class)->create();
+
+        $this->delete(route('backend.user.destroy', ['id' => $user->getHashedId()]));
+        $this->assertResponseStatus(204);
+
+        $this->notSeeInDatabase((new User)->getTable(), [
+            'id' => $user->id,
+            'deleted_at' => null,
+        ]);
+    }
 }

@@ -87,8 +87,13 @@ class UserController extends Controller
         return $this->transform($user, new UserTransformer);
     }
 
-    public function destroy()
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Request $request)
     {
+        $this->userRepository->delete($this->decodeId($request));
         return $this->noContent();
     }
 }

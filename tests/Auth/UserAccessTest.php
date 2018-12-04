@@ -29,16 +29,25 @@ class UserAccessTest extends TestCase
 
         $param = [];
         if ($method === 'post' && $uri === 'user') {
+            // only param
             $param = $this->userData();
-        } elseif ($method === 'get' && $uri === 'user/{id}') {
-            $uri = str_replace('{id}', factory(User::class)->create()->getHashedId(), $uri);
+        } elseif ($method === 'get' && $uri === 'user/{id}' ||
+            $method === 'delete' && $uri === 'user/{id}') {
+            // only uri
+            $uri = $this->replaceUserUri($uri);
         } elseif ($method === 'put' && $uri === 'user/{id}/edit') {
-            $uri = str_replace('{id}', factory(User::class)->create()->getHashedId(), $uri);
+            // both uri and param
+            $uri = $this->replaceUserUri($uri);
             $param = $this->userData();
         }
 
         $this->call($method, $uri, $param);
         $this->assertResponseStatus($statusCode);
+    }
+
+    private function replaceUserUri($uri): string
+    {
+        return str_replace('{id}', factory(User::class)->create()->getHashedId(), $uri);
     }
 
     public function dataResources(): array
