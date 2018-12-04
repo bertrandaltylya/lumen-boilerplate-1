@@ -112,4 +112,18 @@ class UserManagementTest extends TestCase
             'deleted_at' => null,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function restoreNoneDeletedUserWillGive404()
+    {
+        $this->loggedInAs();
+
+        $user = factory(User::class)->create();
+
+        $this->put(route('backend.user.restore', ['id' => $user->getHashedId()]));
+        $this->assertResponseStatus(404);
+
+    }
 }
