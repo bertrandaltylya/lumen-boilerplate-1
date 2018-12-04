@@ -8,8 +8,10 @@
 
 namespace App\Repositories\Auth\User;
 
+use App\Criterion\Eloquent\OnlyTrashedCriteria;
 use App\Models\Auth\User\User;
 use App\Repositories\BaseRepository;
+use Prettus\Repository\Events\RepositoryEntityUpdated;
 
 class UserRepository extends BaseRepository
 {
@@ -18,6 +20,21 @@ class UserRepository extends BaseRepository
         'last_name' => 'like',
         'email' => 'like',
     ];
+
+
+    /**
+     * @param int $id
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function restore(int $id)
+    {
+        $this->pushCriteria(new OnlyTrashedCriteria);
+        $user = $this->find($id);
+
+        $user->restore();
+
+        event(new RepositoryEntityUpdated($this, $user));
+    }
 
     /**
      * Specify Model class name

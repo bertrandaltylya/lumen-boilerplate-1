@@ -93,4 +93,23 @@ class UserManagementTest extends TestCase
             'deleted_at' => null,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function restoreUser()
+    {
+        $this->loggedInAs();
+
+        $user = factory(User::class)->create();
+        $user->delete();
+
+        $this->put(route('backend.user.restore', ['id' => $user->getHashedId()]));
+        $this->assertResponseStatus(200);
+
+        $this->seeInDatabase((new User)->getTable(), [
+            'id' => $user->id,
+            'deleted_at' => null,
+        ]);
+    }
 }

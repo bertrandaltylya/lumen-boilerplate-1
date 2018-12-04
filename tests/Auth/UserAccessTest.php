@@ -35,6 +35,10 @@ class UserAccessTest extends TestCase
             $method === 'delete' && $uri === 'user/{id}') {
             // only uri
             $uri = $this->replaceUserUri($uri);
+
+        } elseif ($method === 'put' && $uri === 'user/{id}/restore') {
+            // only uri
+            $uri = $this->replaceUserUri($uri, true);
         } elseif ($method === 'put' && $uri === 'user/{id}/edit') {
             // both uri and param
             $uri = $this->replaceUserUri($uri);
@@ -45,9 +49,13 @@ class UserAccessTest extends TestCase
         $this->assertResponseStatus($statusCode);
     }
 
-    private function replaceUserUri($uri): string
+    private function replaceUserUri($uri, bool $isDeleted = false): string
     {
-        return str_replace('{id}', factory(User::class)->create()->getHashedId(), $uri);
+        $user = factory(User::class)->create();
+        if ($isDeleted) {
+            $user->delete();
+        }
+        return str_replace('{id}', $user->getHashedId(), $uri);
     }
 
     public function dataResources(): array

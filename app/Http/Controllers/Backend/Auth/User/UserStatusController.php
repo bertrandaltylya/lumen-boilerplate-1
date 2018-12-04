@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
+use Illuminate\Http\Request;
 
 class UserStatusController extends Controller
 {
@@ -25,9 +26,13 @@ class UserStatusController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function restore()
+    /**
+     * @param Request $request
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     */
+    public function restore(Request $request)
     {
-
+        $this->userRepository->restore($this->decodeId($request));
     }
 
     public function purge()
