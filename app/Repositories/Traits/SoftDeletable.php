@@ -15,6 +15,7 @@ trait SoftDeletable
 {
     /**
      * @param int $id
+     * @return mixed
      */
     public function restore(int $id)
     {
@@ -24,6 +25,7 @@ trait SoftDeletable
         $user->restore();
 
         event(new RepositoryEntityUpdated($this, $user));
+        return $user;
     }
 
     public function forceDelete(int $id)

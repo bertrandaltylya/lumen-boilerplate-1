@@ -111,6 +111,13 @@ class UserManagementTest extends TestCase
             'id' => $user->id,
             'deleted_at' => null,
         ]);
+
+        $data = $user->fresh()->toArray();
+        $this->seeJson([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+        ]);
     }
 
     /**

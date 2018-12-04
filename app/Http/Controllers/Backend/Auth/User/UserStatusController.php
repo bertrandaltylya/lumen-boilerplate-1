@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
+use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 
 class UserStatusController extends Controller
@@ -28,10 +29,13 @@ class UserStatusController extends Controller
 
     /**
      * @param Request $request
+     * @return \Spatie\Fractalistic\Fractal
+     * @throws \ReflectionException
      */
     public function restore(Request $request)
     {
-        $this->userRepository->restore($this->decodeId($request));
+        $user = $this->userRepository->restore($this->decodeId($request));
+        return $this->transform($user, new UserTransformer);
     }
 
     /**
