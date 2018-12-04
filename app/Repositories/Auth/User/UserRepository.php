@@ -8,33 +8,19 @@
 
 namespace App\Repositories\Auth\User;
 
-use App\Criterion\Eloquent\OnlyTrashedCriteria;
 use App\Models\Auth\User\User;
 use App\Repositories\BaseRepository;
-use Prettus\Repository\Events\RepositoryEntityUpdated;
+use App\Repositories\Traits\SoftDeletable;
 
 class UserRepository extends BaseRepository
 {
+    use SoftDeletable;
+
     protected $fieldSearchable = [
         'first_name' => 'like',
         'last_name' => 'like',
         'email' => 'like',
     ];
-
-
-    /**
-     * @param int $id
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
-     */
-    public function restore(int $id)
-    {
-        $this->pushCriteria(new OnlyTrashedCriteria);
-        $user = $this->find($id);
-
-        $user->restore();
-
-        event(new RepositoryEntityUpdated($this, $user));
-    }
 
     /**
      * Specify Model class name

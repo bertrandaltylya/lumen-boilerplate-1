@@ -28,7 +28,6 @@ class UserStatusController extends Controller
 
     /**
      * @param Request $request
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function restore(Request $request)
     {
