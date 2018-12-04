@@ -36,7 +36,8 @@ class UserAccessTest extends TestCase
             // only uri
             $uri = $this->replaceUserUri($uri);
 
-        } elseif ($method === 'put' && $uri === 'user/{id}/restore') {
+        } elseif ($method === 'put' && $uri === 'user/{id}/restore' ||
+            $method === 'delete' && $uri === 'user/{id}/purge') {
             // only uri
             $uri = $this->replaceUserUri($uri, true);
         } elseif ($method === 'put' && $uri === 'user/{id}/edit') {
@@ -68,7 +69,7 @@ class UserAccessTest extends TestCase
             'update by system' => ['put', 'user/{id}/edit', 'system', 200],
             'destroy by system' => ['delete', 'user/{id}', 'system', 204],
             'restore by system' => ['put', 'user/{id}/restore', 'system', 200],
-            'purge by system' => ['put', 'user/{id}/purge', 'system', 204],
+            'purge by system' => ['delete', 'user/{id}/purge', 'system', 204],
             // admin
             'store by admin' => ['post', 'user', 'admin', 201],
             'index by admin' => ['get', 'user', 'admin', 200],
@@ -76,7 +77,7 @@ class UserAccessTest extends TestCase
             'update by admin' => ['put', 'user/{id}/edit', 'admin', 200],
             'destroy by admin' => ['delete', 'user/{id}', 'admin', 204],
             'restore by admin' => ['put', 'user/{id}/restore', 'admin', 200],
-            'purge by admin' => ['put', 'user/{id}/purge', 'admin', 204],
+            'purge by admin' => ['delete', 'user/{id}/purge', 'admin', 204],
             // user none role
             'store by none role' => ['post', 'user', 'user', 403],
             'index by none role' => ['get', 'user', 'user', 403],
@@ -84,7 +85,7 @@ class UserAccessTest extends TestCase
             'update by none role' => ['put', 'user/{id}/edit', 'user', 403],
             'destroy by none role' => ['delete', 'user/{id}', 'user', 403],
             'restore by none role' => ['put', 'user/{id}/restore', 'user', 403],
-            'purge by none role' => ['put', 'user/{id}/purge', 'user', 403],
+            'purge by none role' => ['delete', 'user/{id}/purge', 'user', 403],
             // guest
             'store by guest' => ['post', 'user', '', 401],
             'index by guest' => ['get', 'user', '', 401],
@@ -92,7 +93,7 @@ class UserAccessTest extends TestCase
             'update by guest' => ['put', 'user/{id}/edit', '', 401],
             'destroy by guest' => ['delete', 'user/{id}', '', 401],
             'restore by guest' => ['put', 'user/{id}/restore', '', 401],
-            'purge by guest' => ['put', 'user/{id}/purge', '', 401],
+            'purge by guest' => ['delete', 'user/{id}/purge', '', 401],
         ];
     }
 }

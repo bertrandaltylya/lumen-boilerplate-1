@@ -34,8 +34,13 @@ class UserStatusController extends Controller
         $this->userRepository->restore($this->decodeId($request));
     }
 
-    public function purge()
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function purge(Request $request)
     {
+        $this->userRepository->forceDelete($this->decodeId($request));
         return $this->noContent();
     }
 }

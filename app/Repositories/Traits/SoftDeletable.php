@@ -26,4 +26,13 @@ trait SoftDeletable
         event(new RepositoryEntityUpdated($this, $user));
     }
 
+    public function forceDelete(int $id)
+    {
+        $this->pushCriteria(new OnlyTrashedCriteria);
+        $user = $this->find($id);
+
+        $user->forceDelete();
+
+        event(new RepositoryEntityUpdated($this, $user));
+    }
 }

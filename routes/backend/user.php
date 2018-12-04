@@ -42,7 +42,7 @@ $router->group([
             'as' => 'restore',
             'uses' => 'UserStatusController@restore',
         ]);
-        $router->put('/{id}/purge', [
+        $router->delete('/{id}/purge', [
             'as' => 'purge',
             'uses' => 'UserStatusController@purge',
         ]);

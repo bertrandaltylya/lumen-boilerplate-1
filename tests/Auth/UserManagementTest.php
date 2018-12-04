@@ -126,4 +126,36 @@ class UserManagementTest extends TestCase
         $this->assertResponseStatus(404);
 
     }
+
+    /**
+     * @test
+     */
+    public function purgeUser()
+    {
+        $this->loggedInAs();
+
+        $user = factory(User::class)->create();
+        $user->delete();
+
+        $this->delete(route('backend.user.purge', ['id' => $user->getHashedId()]));
+        $this->assertResponseStatus(204);
+
+        $this->notSeeInDatabase((new User)->getTable(), [
+            'id' => $user->id,
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function purgeNoneDeletedUserWillGive404()
+    {
+        $this->loggedInAs();
+
+        $user = factory(User::class)->create();
+
+        $this->delete(route('backend.user.purge', ['id' => $user->getHashedId()]));
+        $this->assertResponseStatus(404);
+
+    }
 }
