@@ -10,8 +10,6 @@ namespace App\Http\Controllers\Traits;
 
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Pluralizer;
-use ReflectionClass;
 use Spatie\Fractal\Fractal;
 
 trait TransformerTrait
@@ -41,7 +39,6 @@ trait TransformerTrait
     /**
      * @param $data
      * @return string|null
-     * @throws \ReflectionException
      */
     private function _getResourceKey($data)
     {
@@ -55,13 +52,6 @@ trait TransformerTrait
         if (empty($model)) {
             return null;
         }
-        if (isset($model->resourceKey)) {
-            $resourceKey = $model->resourceKey;
-        } else {
-            $reflect = new ReflectionClass($model);
-            $resourceKey = strtolower(Pluralizer::plural($reflect->getShortName()));
-        }
-
-        return $resourceKey;
+        return $model->getResourceKey();
     }
 }

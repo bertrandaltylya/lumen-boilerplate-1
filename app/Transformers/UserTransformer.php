@@ -13,6 +13,13 @@ use App\Models\Auth\User\User;
 class UserTransformer extends BaseTransformer
 {
     /**
+     * @var  array
+     */
+    protected $availableIncludes = [
+        'roles',
+    ];
+
+    /**
      * A Fractal transformer.
      *
      * @param \App\Models\Auth\User\User $user
@@ -32,5 +39,10 @@ class UserTransformer extends BaseTransformer
         ]);
 
         return $this->addTimesHumanReadable($user, $response);
+    }
+
+    public function includeRoles(User $user)
+    {
+        return $this->collection($user->roles, new RoleTransformer);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models\Auth\User;
 
 use App\Traits\Hashable;
+use App\Traits\HasResourceKeyTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -20,6 +21,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use HasRoles;
     use SoftDeletes;
     use Hashable;
+    use HasResourceKeyTrait;
 
     /**
      * all permissions
