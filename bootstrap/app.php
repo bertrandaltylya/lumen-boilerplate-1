@@ -32,6 +32,9 @@ $app->configure('repository');
 $app->configure('settings');
 $app->configure('hashids');
 
+$app->alias('cache', 'Illuminate\Cache\CacheManager');
+$app->alias('auth', 'Illuminate\Auth\AuthManager');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
