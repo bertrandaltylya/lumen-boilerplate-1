@@ -10,17 +10,17 @@ namespace App\Http\Controllers\Traits;
 
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Collection;
+use League\Fractal\TransformerAbstract;
 use Spatie\Fractal\Fractal;
 
 trait TransformerTrait
 {
     /**
      * @param $data
-     * @param $transformer
+     * @param TransformerAbstract $transformer
      * @return \Spatie\Fractalistic\Fractal
-     * @throws \ReflectionException
      */
-    protected function transform($data, $transformer)
+    protected function transform($data, TransformerAbstract $transformer)
     {
         return $this->_transform($data, $transformer);
     }
@@ -29,11 +29,14 @@ trait TransformerTrait
      * @param $data
      * @param $transformer
      * @return \Spatie\Fractalistic\Fractal
-     * @throws \ReflectionException
      */
     private function _transform($data, $transformer)
     {
-        return Fractal::create($data, $transformer)->withResourceName($this->_getResourceKey($data));
+        return Fractal::create($data, $transformer)
+            ->withResourceName($this->_getResourceKey($data))
+            ->addMeta([
+                'include' => $transformer->getAvailableIncludes(),
+            ]);
     }
 
     /**
