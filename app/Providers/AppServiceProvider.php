@@ -14,6 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->alias('cache', 'Illuminate\Cache\CacheManager');
+        $this->app->alias('auth', 'Illuminate\Auth\AuthManager');
+
         LumenPassport::routes($this->app->router);
     }
 }
