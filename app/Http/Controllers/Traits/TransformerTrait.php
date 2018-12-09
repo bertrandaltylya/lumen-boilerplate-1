@@ -22,16 +22,6 @@ trait TransformerTrait
      */
     protected function transform($data, TransformerAbstract $transformer)
     {
-        return $this->_transform($data, $transformer);
-    }
-
-    /**
-     * @param $data
-     * @param $transformer
-     * @return \Spatie\Fractalistic\Fractal
-     */
-    private function _transform($data, $transformer)
-    {
         return Fractal::create($data, $transformer)
             ->withResourceName($this->_getResourceKey($data))
             ->addMeta([
