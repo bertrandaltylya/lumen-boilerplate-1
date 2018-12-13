@@ -22,6 +22,7 @@ class RoleTransformer extends BaseTransformer
      * A Fractal transformer.
      *
      * @param Role $role
+     *
      * @return array
      */
     public function transform(Role $role)

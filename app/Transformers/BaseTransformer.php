@@ -17,6 +17,7 @@ abstract class BaseTransformer extends TransformerAbstract
      * @param array $response
      * @param array $data
      * @param array $roleNames
+     *
      * @return array
      */
     public function filterData(array $response, array $data, array $roleNames = ['system']): array
@@ -29,9 +30,10 @@ abstract class BaseTransformer extends TransformerAbstract
     }
 
     /**
-     * @param mixed $data
+     * @param mixed                        $data
      * @param callable|TransformerAbstract $transformer
-     * @param null $resourceKey
+     * @param null                         $resourceKey
+     *
      * @return \League\Fractal\Resource\Collection
      */
     public function collection($data, $transformer, $resourceKey = null)
@@ -40,8 +42,9 @@ abstract class BaseTransformer extends TransformerAbstract
     }
 
     /**
-     * @param $data
+     * @param      $data
      * @param null $resourceKey
+     *
      * @return string|null
      */
     private function getResourceKey($data, $resourceKey = null)
@@ -54,9 +57,10 @@ abstract class BaseTransformer extends TransformerAbstract
     }
 
     /**
-     * @param mixed $data
+     * @param mixed                        $data
      * @param callable|TransformerAbstract $transformer
-     * @param null $resourceKey
+     * @param null                         $resourceKey
+     *
      * @return \League\Fractal\Resource\Item
      */
     public function item($data, $transformer, $resourceKey = null)
@@ -68,10 +72,11 @@ abstract class BaseTransformer extends TransformerAbstract
     /**
      * prepare human readable time with users timezone
      *
-     * @param $entity
-     * @param $responseData
+     * @param       $entity
+     * @param       $responseData
      * @param array $columns
-     * @param bool $isIncludeDefault
+     * @param bool  $isIncludeDefault
+     *
      * @return array
      */
     public function addTimesHumanReadable($entity, $responseData, array $columns = [], $isIncludeDefault = true): array

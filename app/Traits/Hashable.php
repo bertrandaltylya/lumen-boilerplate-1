@@ -15,7 +15,8 @@ trait Hashable
 {
     /**
      * @param \Illuminate\Http\Request $request
-     * @param string $keyColumn
+     * @param string                   $keyColumn
+     *
      * @return int
      */
     public function decodeId(Request $request, string $keyColumn = 'id'): int
@@ -35,6 +36,7 @@ trait Hashable
 
     /**
      * @param string $key
+     *
      * @return string
      */
     public function getHashedId(string $key = 'id')

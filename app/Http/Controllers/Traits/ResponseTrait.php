@@ -14,6 +14,7 @@ trait ResponseTrait
 {
     /**
      * @param int $status
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function noContent($status = 204)
@@ -22,10 +23,11 @@ trait ResponseTrait
     }
 
     /**
-     * @param null $message
-     * @param int $status
+     * @param null  $message
+     * @param int   $status
      * @param array $headers
-     * @param int $options
+     * @param int   $options
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function accepted($message = null, $status = 202, array $headers = [], $options = 0)
@@ -34,10 +36,11 @@ trait ResponseTrait
     }
 
     /**
-     * @param null $message
-     * @param int $status
+     * @param null  $message
+     * @param int   $status
      * @param array $headers
-     * @param int $options
+     * @param int   $options
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function created($message = null, $status = 201, array $headers = [], $options = 0)

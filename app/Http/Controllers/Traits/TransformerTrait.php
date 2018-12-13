@@ -16,8 +16,9 @@ use Spatie\Fractal\Fractal;
 trait TransformerTrait
 {
     /**
-     * @param $data
-     * @param TransformerAbstract $transformer
+     * @param                                     $data
+     * @param \League\Fractal\TransformerAbstract $transformer
+     *
      * @return \Spatie\Fractalistic\Fractal
      */
     protected function transform($data, TransformerAbstract $transformer)
@@ -31,6 +32,7 @@ trait TransformerTrait
 
     /**
      * @param $data
+     *
      * @return string|null
      */
     private function _getResourceKey($data)

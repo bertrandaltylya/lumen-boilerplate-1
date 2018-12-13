@@ -23,6 +23,7 @@ class UserTransformer extends BaseTransformer
      * A Fractal transformer.
      *
      * @param \App\Models\Auth\User\User $user
+     *
      * @return array
      */
     public function transform(User $user)
