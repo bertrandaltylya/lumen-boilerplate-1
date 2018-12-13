@@ -7,6 +7,8 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Prettus\Validator\Exceptions\ValidatorException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
@@ -28,8 +30,9 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception $exception
-     * @return void
+     * @param \Exception $exception
+     *
+     * @throws \Exception
      */
     public function report(Exception $exception)
     {
@@ -40,18 +43,32 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $exception
+     * @param  \Exception               $exception
+     *
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
-        $rendered = parent::render($request, $exception);
+        if ($exception instanceof ValidatorException) {
+            return $this->prettusValidation($exception);
+        }
 
+        $rendered = parent::render($request, $exception);
         return response()->json([
             'error' => [
                 'code' => $rendered->getStatusCode(),
                 'message' => $exception->getMessage(),
             ],
         ], $rendered->getStatusCode());
+    }
+
+    private function prettusValidation(ValidatorException $exception)
+    {
+        return response()->json([
+            'error' => [
+                'code' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                'message' => $exception->getMessageBag(),
+            ],
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

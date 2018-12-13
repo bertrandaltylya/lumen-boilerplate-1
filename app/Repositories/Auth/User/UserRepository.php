@@ -11,6 +11,7 @@ namespace App\Repositories\Auth\User;
 use App\Models\Auth\User\User;
 use App\Repositories\BaseRepository;
 use App\Repositories\Traits\SoftDeletable;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 class UserRepository extends BaseRepository
 {
@@ -21,6 +22,26 @@ class UserRepository extends BaseRepository
         'last_name' => 'like',
         'email' => 'like',
     ];
+
+    /**
+     * Specify Validator Rules
+     *
+     * @var array
+     */
+    protected $rules = [
+        ValidatorInterface::RULE_CREATE => [
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'first_name' => 'string',
+            'last_name' => 'string',
+            'email' => 'email|unique:users,email',
+        ]
+    ];
+
 
     /**
      * Specify Model class name
