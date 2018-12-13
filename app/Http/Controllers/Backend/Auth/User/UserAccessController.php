@@ -24,22 +24,7 @@ class UserAccessController extends Controller
      *
      * @return \Spatie\Fractalistic\Fractal
      * @authenticated
-     * @response {
-     * "data": {
-     * "type": "users",
-     * "id": "KY31NvmVPjeE0y6eBO4DwxRbzrGoJqnk",
-     * "attributes": {
-     * "first_name": "Dovie",
-     * "last_name": "Homenick",
-     * "email": "admin@admin.com"
-     * }
-     * },
-     * "meta": {
-     * "include": [
-     * "roles"
-     * ]
-     * }
-     * }
+     * @responseFile responses/user.get.json
      */
     public function profile()
     {

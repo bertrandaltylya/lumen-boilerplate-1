@@ -41,6 +41,7 @@ class UserController extends Controller
      * @return \Spatie\Fractalistic\Fractal
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @authenticated
+     * @responseFile responses/users.get.json
      */
     public function index(Request $request)
     {
@@ -57,6 +58,7 @@ class UserController extends Controller
      * @return \Spatie\Fractalistic\Fractal
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @authenticated
+     * @responseFile responses/user.get.json
      */
     public function show(Request $request)
     {
@@ -78,34 +80,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @authenticated
      * @throws \Prettus\Validator\Exceptions\ValidatorException
-     * @bodyParam first_name string required First name. Example: Lloric
-     * @bodyParam last_name string required Last name. Example: Garcia
-     * @bodyParam email string required A valid email and unique. Example: lloricode@gmail.com
-     * @bodyParam password string required Password Example: secret
-     * @response  201 {
-     * "data": {
-     * "type": "users",
-     * "id": "N7rmXnod25Zvz06gN79MKB48EJWePQjp",
-     * "attributes": {
-     * "first_name": "Lloric",
-     * "last_name": "Garcia",
-     * "email": "lloricode@gmail.comx",
-     * "created_at": "13/12/2018 08:19:14 AM",
-     * "created_at_readable": "1 second ago",
-     * "created_at_tz": "13/12/2018 08:19:14 AM",
-     * "created_at_readable_tz": "1 second ago",
-     * "updated_at": "13/12/2018 08:19:14 AM",
-     * "updated_at_readable": "1 second ago",
-     * "updated_at_tz": "13/12/2018 08:19:14 AM",
-     * "updated_at_readable_tz": "1 second ago"
-     * }
-     * },
-     * "meta": {
-     * "include": [
-     * "roles"
-     * ]
-     * }
-     * }
+     * @bodyParam    first_name string required First name. Example: Lloric
+     * @bodyParam    last_name string required Last name. Example: Garcia
+     * @bodyParam    email string required A valid email and unique. Example: lloricode@gmail.com
+     * @bodyParam    password string required Password Example: secret
+     * @responseFile 201 responses/user.get.json
      */
     public function store(Request $request)
     {
@@ -120,6 +99,12 @@ class UserController extends Controller
      * @return \Spatie\Fractalistic\Fractal
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      * @authenticated
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @bodyParam    first_name string First name. Example: Lloric
+     * @bodyParam    last_name string Last name. Example: Garcia
+     * @bodyParam    email string A valid email and unique. Example: lloricode@gmail.com
+     * @bodyParam    password string Password Example: secret
+     * @responseFile responses/user.get.json
      */
     public function update(Request $request)
     {
@@ -140,6 +125,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      * @authenticated
+     * @responseFile 204 responses/no-content.get.json
      */
     public function destroy(Request $request)
     {

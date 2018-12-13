@@ -40,6 +40,7 @@ class UserStatusController extends Controller
      *
      * @return \Spatie\Fractalistic\Fractal
      * @authenticated
+     * @responseFile responses/user.get.json
      */
     public function restore(Request $request)
     {
@@ -54,6 +55,7 @@ class UserStatusController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      * @authenticated
+     * @responseFile 204 responses/no-content.get.json
      */
     public function purge(Request $request)
     {
