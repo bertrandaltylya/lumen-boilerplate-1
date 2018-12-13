@@ -22,7 +22,7 @@ $router->group([
         ]);
         $router->post('/', [
             'as' => 'store',
-            'uses' => 'UserController@create',
+            'uses' => 'UserController@store',
         ]);
         $router->get('/{id}', [
             'as' => 'show',

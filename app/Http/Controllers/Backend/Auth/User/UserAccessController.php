@@ -11,11 +11,35 @@ namespace App\Http\Controllers\Backend\Auth\User;
 use App\Http\Controllers\Controller;
 use App\Transformers\UserTransformer;
 
+/**
+ * Class UserAccessController
+ *
+ * @package App\Http\Controllers\Backend\Auth\User
+ * @group   User Management
+ */
 class UserAccessController extends Controller
 {
     /**
+     * Get current authenticated user.
+     *
      * @return \Spatie\Fractalistic\Fractal
-     * @throws \ReflectionException
+     * @authenticated
+     * @response {
+     * "data": {
+     * "type": "users",
+     * "id": "KY31NvmVPjeE0y6eBO4DwxRbzrGoJqnk",
+     * "attributes": {
+     * "first_name": "Dovie",
+     * "last_name": "Homenick",
+     * "email": "admin@admin.com"
+     * }
+     * },
+     * "meta": {
+     * "include": [
+     * "roles"
+     * ]
+     * }
+     * }
      */
     public function profile()
     {

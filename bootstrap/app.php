@@ -31,6 +31,7 @@ $app->configure('permission');
 $app->configure('repository');
 $app->configure('settings');
 $app->configure('hashids');
+$app->configure('apidoc');
 
 $app->alias('cache', 'Illuminate\Cache\CacheManager');
 $app->alias('auth', 'Illuminate\Auth\AuthManager');
@@ -96,6 +97,7 @@ if ($app->environment() !== 'production') {
 $app->register(Prettus\Repository\Providers\RepositoryServiceProvider::class);
 $app->register(Spatie\Permission\PermissionServiceProvider::class);
 $app->register(Vinkla\Hashids\HashidsServiceProvider::class);
+$app->register(\Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

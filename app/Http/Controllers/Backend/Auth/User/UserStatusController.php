@@ -13,6 +13,12 @@ use App\Repositories\Auth\User\UserRepository;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 
+/**
+ * Class UserStatusController
+ *
+ * @package App\Http\Controllers\Backend\Auth\User
+ * @group   User Management
+ */
 class UserStatusController extends Controller
 {
     protected $userRepository;
@@ -28,9 +34,12 @@ class UserStatusController extends Controller
     }
 
     /**
+     * Restore user.
+     *
      * @param Request $request
+     *
      * @return \Spatie\Fractalistic\Fractal
-     * @throws \ReflectionException
+     * @authenticated
      */
     public function restore(Request $request)
     {
@@ -39,8 +48,12 @@ class UserStatusController extends Controller
     }
 
     /**
+     * Purge user.
+     *
      * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
+     * @authenticated
      */
     public function purge(Request $request)
     {

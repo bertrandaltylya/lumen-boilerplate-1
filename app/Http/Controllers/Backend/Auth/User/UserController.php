@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 
+/**
+ * Class UserController
+ *
+ * @package App\Http\Controllers\Backend\Auth\User
+ * @group   User Management
+ */
 class UserController extends Controller
 {
     protected $userRepository;
@@ -19,7 +25,7 @@ class UserController extends Controller
         $permissions = $userRepository->model()::PERMISSIONS;
 
         $this->middleware('permission:' . $permissions['index'], ['only' => 'index']);
-        $this->middleware('permission:' . $permissions['create'], ['only' => 'create']);
+        $this->middleware('permission:' . $permissions['create'], ['only' => 'store']);
         $this->middleware('permission:' . $permissions['show'], ['only' => 'show']);
         $this->middleware('permission:' . $permissions['update'], ['only' => 'update']);
         $this->middleware('permission:' . $permissions['destroy'], ['only' => 'destroy']);
@@ -28,10 +34,13 @@ class UserController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * Get all users.
+     *
+     * @param Request $request
+     *
      * @return \Spatie\Fractalistic\Fractal
      * @throws \Prettus\Repository\Exceptions\RepositoryException
-     * @throws \ReflectionException
+     * @authenticated
      */
     public function index(Request $request)
     {
@@ -41,10 +50,13 @@ class UserController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * Show user.
+     *
+     * @param Request $request
+     *
      * @return \Spatie\Fractalistic\Fractal
      * @throws \Prettus\Repository\Exceptions\RepositoryException
-     * @throws \ReflectionException
+     * @authenticated
      */
     public function show(Request $request)
     {
@@ -59,21 +71,55 @@ class UserController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * Store user.
+     *
+     * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
+     * @authenticated
      * @throws \Prettus\Validator\Exceptions\ValidatorException
-     * @throws \ReflectionException
+     * @bodyParam first_name string required First name. Example: Lloric
+     * @bodyParam last_name string required Last name. Example: Garcia
+     * @bodyParam email string required A valid email and unique. Example: lloricode@gmail.com
+     * @bodyParam password string required Password Example: secret
+     * @response  201 {
+     * "data": {
+     * "type": "users",
+     * "id": "N7rmXnod25Zvz06gN79MKB48EJWePQjp",
+     * "attributes": {
+     * "first_name": "Lloric",
+     * "last_name": "Garcia",
+     * "email": "lloricode@gmail.comx",
+     * "created_at": "13/12/2018 08:19:14 AM",
+     * "created_at_readable": "1 second ago",
+     * "created_at_tz": "13/12/2018 08:19:14 AM",
+     * "created_at_readable_tz": "1 second ago",
+     * "updated_at": "13/12/2018 08:19:14 AM",
+     * "updated_at_readable": "1 second ago",
+     * "updated_at_tz": "13/12/2018 08:19:14 AM",
+     * "updated_at_readable_tz": "1 second ago"
+     * }
+     * },
+     * "meta": {
+     * "include": [
+     * "roles"
+     * ]
+     * }
+     * }
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         return $this->created($this->transform($this->userRepository->create($request->all()), new UserTransformer));
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * Update user.
+     *
+     * @param Request $request
+     *
      * @return \Spatie\Fractalistic\Fractal
      * @throws \Prettus\Validator\Exceptions\ValidatorException
-     * @throws \ReflectionException
+     * @authenticated
      */
     public function update(Request $request)
     {
@@ -88,8 +134,12 @@ class UserController extends Controller
     }
 
     /**
+     * Destroy user.
+     *
      * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
+     * @authenticated
      */
     public function destroy(Request $request)
     {
