@@ -52,6 +52,7 @@
     ],
     "clear-all": [
       "@php artisan cache:clear",
+      "@php artisan permission:cache-reset",
       "composer dump-autoload --no-interaction --ansi --verbose --optimize"
     ],
     "ide-helper": [

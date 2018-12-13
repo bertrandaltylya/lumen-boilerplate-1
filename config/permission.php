@@ -1,12 +1,11 @@
 <?php
 
-
 return [
 
     'models' => [
 
         /*
-         * When using the "HasRoles" trait from this package, we need to know which
+         * When using the "HasPermissions" trait from this package, we need to know which
          * Eloquent model should be used to retrieve your permissions. Of course, it
          * is often just the "Permission" model but you may use whatever you like.
          *
@@ -41,7 +40,7 @@ return [
         'roles' => 'permissions_roles',
 
         /*
-         * When using the "HasRoles" trait from this package, we need to know which
+         * When using the "HasPermissions" trait from this package, we need to know which
          * table should be used to retrieve your permissions. We have chosen a basic
          * default value but you may easily change it to any table you like.
          */
@@ -49,7 +48,7 @@ return [
         'permissions' => 'permissions_permissions',
 
         /*
-         * When using the "HasRoles" trait from this package, we need to know which
+         * When using the "HasPermissions" trait from this package, we need to know which
          * table should be used to retrieve your models permissions. We have chosen a
          * basic default value but you may easily change it to any table you like.
          */
@@ -124,6 +123,6 @@ return [
          * role caching using any of the `store` drivers listed in the cache.php config
          * file. Using 'default' here means to use the `default` set in cache.php.
          */
-        'store' => 'default',
+        'store' => 'file',
     ],
 ];
