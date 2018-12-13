@@ -25,7 +25,7 @@ class UserStatusController extends Controller
 
     public function __construct(UserRepository $userRepository)
     {
-        $permissions = $userRepository->model()::PERMISSIONS;
+        $permissions = app($userRepository->model())::PERMISSIONS;
 
         $this->middleware('permission:' . $permissions['restore'], ['only' => 'restore']);
         $this->middleware('permission:' . $permissions['purge'], ['only' => 'purge']);

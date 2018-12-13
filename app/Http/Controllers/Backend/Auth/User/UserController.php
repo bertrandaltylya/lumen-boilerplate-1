@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function __construct(UserRepository $userRepository)
     {
-        $permissions = $userRepository->model()::PERMISSIONS;
+        $permissions = app($userRepository->model())::PERMISSIONS;
 
         $this->middleware('permission:' . $permissions['index'], ['only' => 'index']);
         $this->middleware('permission:' . $permissions['create'], ['only' => 'store']);
