@@ -18,10 +18,10 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 - run `composer fresh`, this will migrate and seed fake data to your database, and install laravel passport. see composer.json `scripts` index.
 - if you not familiar with  [laravel/passport](https://github.com/laravel/passport), you must see  [this](https://github.com/laravel/passport) first.
 - how to login? see [laravel/passport](https://github.com/laravel/passport)
-- to generate documentation run `php artisan apidoc:generate`, then visit `http://lumen-boilerplate.test/docs` on browser.
 
 ### Available Endpoints
-[TODO]
+
+- to generate documentation run `php artisan apidoc:generate`, then visit `http://lumen-boilerplate.test/docs` on browser.
 
 ## Running the tests
 - you can view integration [here](https://travis-ci.org/lloricode/lumen-boilerplate)
