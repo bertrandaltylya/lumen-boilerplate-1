@@ -3467,16 +3467,16 @@
         },
         {
             "name": "spatie/laravel-permission",
-          "version": "2.28.2",
+          "version": "2.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-              "reference": "1887a5851013bf1a457f2a65477f96e98ae3f53a"
+              "reference": "7f308806ca051fca42685e4a97a282139a6a7982"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/1887a5851013bf1a457f2a65477f96e98ae3f53a",
-              "reference": "1887a5851013bf1a457f2a65477f96e98ae3f53a",
+              "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/7f308806ca051fca42685e4a97a282139a6a7982",
+              "reference": "7f308806ca051fca42685e4a97a282139a6a7982",
                 "shasum": ""
             },
             "require": {
@@ -3528,7 +3528,7 @@
                 "security",
                 "spatie"
             ],
-          "time": "2018-12-11T02:03:59+00:00"
+          "time": "2018-12-16T00:49:22+00:00"
         },
         {
             "name": "symfony/console",
@@ -5384,16 +5384,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.9.0",
+          "version": "v2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "21fdabe2fc01e004e1966f200d900554876bc63c"
+              "reference": "ec74d6e300d78fbc896669c3ca57ef9719adc9c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/21fdabe2fc01e004e1966f200d900554876bc63c",
-                "reference": "21fdabe2fc01e004e1966f200d900554876bc63c",
+              "url": "https://api.github.com/repos/doctrine/dbal/zipball/ec74d6e300d78fbc896669c3ca57ef9719adc9c6",
+              "reference": "ec74d6e300d78fbc896669c3ca57ef9719adc9c6",
                 "shasum": ""
             },
             "require": {
@@ -5462,7 +5462,7 @@
                 "php",
                 "queryobject"
             ],
-            "time": "2018-12-04T04:39:48+00:00"
+          "time": "2018-12-14T04:51:13+00:00"
         },
         {
             "name": "doctrine/event-manager",
