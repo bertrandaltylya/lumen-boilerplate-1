@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     const PERMISSIONS = [
         // basic
         'index' => 'user index',
-        'create' => 'user create',
+        'create' => 'user store',
         'show' => 'user show',
         'update' => 'user update',
         'destroy' => 'user destroy',

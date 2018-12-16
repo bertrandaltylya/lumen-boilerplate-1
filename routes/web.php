@@ -27,6 +27,7 @@ $router->group([
         'as' => 'backend',
     ], function () use ($router) {
 
-        include 'backend/user.php';
+        include 'backend/auth/user.php';
+        include 'backend/auth/role.php';
     });
 });

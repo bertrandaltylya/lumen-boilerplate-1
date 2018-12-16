@@ -1,20 +1,20 @@
 <?php
 
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
-
 trait SeederHelper
 {
     public function seederPermission(array $permissionNames, bool $isAddToAdminRole = true, array $except = [])
     {
+        $roleModel = app(config('permission.models.role'));
+        $permissionModel = app(config('permission.models.permission'));
+
         foreach ($permissionNames as $permissionName) {
-            $permission = Permission::create([
+            $permission = $permissionModel::create([
                 'name' => $permissionName,
             ]);
-            Role::findByName('system')->givePermissionTo($permission);
+            $roleModel::findByName('system')->givePermissionTo($permission);
             if ($isAddToAdminRole) {
                 if (!in_array($permissionName, $except)) {
-                    Role::findByName('admin')->givePermissionTo($permission);
+                    $roleModel::findByName('admin')->givePermissionTo($permission);
                 }
             }
         }

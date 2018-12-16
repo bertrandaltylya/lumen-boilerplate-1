@@ -6,9 +6,10 @@
  * Time: 3:31 PM
  */
 
-namespace App\Transformers;
+namespace App\Transformers\Auth;
 
 use App\Models\Auth\Role\Role;
+use App\Transformers\BaseTransformer;
 
 class RoleTransformer extends BaseTransformer
 {

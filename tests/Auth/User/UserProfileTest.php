@@ -6,7 +6,7 @@
  * Time: 5:16 PM
  */
 
-namespace Tests\Auth;
+namespace Tests\Auth\User;
 
 use Tests\TestCase;
 

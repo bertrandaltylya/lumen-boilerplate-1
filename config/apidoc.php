@@ -45,6 +45,7 @@ return [
 //                    '*',
                     '/user*',
                     '/profile',
+                    '/role*',
                 ],
 
                 /*

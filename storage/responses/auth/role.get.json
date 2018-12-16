@@ -1,0 +1,12 @@
+{
+  "data": {
+    "type": "roles",
+    "id": "vLWdlDGY41orj59M59VzxQbe8PBApNE0",
+    "attributes": {
+      "name": "test role name"
+    }
+  },
+  "meta": {
+    "include": []
+  }
+}

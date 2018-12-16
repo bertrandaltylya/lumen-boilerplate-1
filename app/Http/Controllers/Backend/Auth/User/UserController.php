@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend\Auth\User;
 use App\Criterion\Eloquent\ThisWhereEqualsCriteria;
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
-use App\Transformers\UserTransformer;
+use App\Transformers\Auth\UserTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -41,7 +41,7 @@ class UserController extends Controller
      * @return \Spatie\Fractalistic\Fractal
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @authenticated
-     * @responseFile responses/users.get.json
+     * @responseFile responses/auth/users.get.json
      */
     public function index(Request $request)
     {
@@ -58,7 +58,7 @@ class UserController extends Controller
      * @return \Spatie\Fractalistic\Fractal
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @authenticated
-     * @responseFile responses/user.get.json
+     * @responseFile responses/auth/user.get.json
      */
     public function show(Request $request)
     {
@@ -84,7 +84,7 @@ class UserController extends Controller
      * @bodyParam    last_name string required Last name. Example: Garcia
      * @bodyParam    email string required A valid email and unique. Example: lloricode@gmail.com
      * @bodyParam    password string required Password Example: secret
-     * @responseFile 201 responses/user.get.json
+     * @responseFile 201 responses/auth/user.get.json
      */
     public function store(Request $request)
     {
@@ -104,7 +104,7 @@ class UserController extends Controller
      * @bodyParam    last_name string Last name. Example: Garcia
      * @bodyParam    email string A valid email and unique. Example: lloricode@gmail.com
      * @bodyParam    password string Password Example: secret
-     * @responseFile responses/user.get.json
+     * @responseFile responses/auth/user.get.json
      */
     public function update(Request $request)
     {

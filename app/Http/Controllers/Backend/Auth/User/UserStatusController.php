@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
-use App\Transformers\UserTransformer;
+use App\Transformers\Auth\UserTransformer;
 use Illuminate\Http\Request;
 
 /**
@@ -40,7 +40,7 @@ class UserStatusController extends Controller
      *
      * @return \Spatie\Fractalistic\Fractal
      * @authenticated
-     * @responseFile responses/user.get.json
+     * @responseFile responses/auth/user.get.json
      */
     public function restore(Request $request)
     {

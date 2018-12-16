@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class RolesSeeder extends Seeder
 {
+    use SeederHelper;
+
     /**
      * Run the database seeds.
      *
@@ -13,13 +13,17 @@ class RolesSeeder extends Seeder
      */
     public function run()
     {
-        $viewBackend = Permission::create([
+        $roleModel = app(config('permission.models.role'));
+
+        $viewBackend = app(config('permission.models.permission'))::create([
             'name' => 'view backend',
         ]);
         foreach (['system', 'admin',] as $roleName) {
-            Role::create([
+            $roleModel::create([
                 'name' => $roleName,
             ])->givePermissionTo($viewBackend);
         }
+
+        $this->seederPermission($roleModel::PERMISSIONS);
     }
 }

@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
-use App\Transformers\UserTransformer;
+use App\Transformers\Auth\UserTransformer;
 
 /**
  * Class UserAccessController
@@ -24,7 +24,7 @@ class UserAccessController extends Controller
      *
      * @return \Spatie\Fractalistic\Fractal
      * @authenticated
-     * @responseFile responses/user.get.json
+     * @responseFile responses/auth/user.get.json
      */
     public function profile()
     {
