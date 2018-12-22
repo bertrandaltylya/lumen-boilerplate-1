@@ -14,12 +14,12 @@ use App\Transformers\Auth\UserTransformer;
 use Illuminate\Http\Request;
 
 /**
- * Class UserStatusController
+ * Class UserDeleteController
  *
  * @package App\Http\Controllers\Backend\Auth\User
  * @group   User Management
  */
-class UserStatusController extends Controller
+class UserDeleteController extends Controller
 {
     protected $userRepository;
 

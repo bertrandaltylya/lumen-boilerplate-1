@@ -37,14 +37,14 @@ $router->group([
             'uses' => 'UserController@destroy',
         ]);
 
-        // status
+        // deletes
         $router->put('/{id}/restore', [
             'as' => 'restore',
-            'uses' => 'UserStatusController@restore',
+            'uses' => 'UserDeleteController@restore',
         ]);
         $router->delete('/{id}/purge', [
             'as' => 'purge',
-            'uses' => 'UserStatusController@purge',
+            'uses' => 'UserDeleteController@purge',
         ]);
     });
 });
