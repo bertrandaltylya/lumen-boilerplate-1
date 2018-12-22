@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Backend\Auth\User;
 
-use App\Criterion\Eloquent\ThisWhereEqualsCriteria;
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
 use App\Transformers\Auth\UserTransformer;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -53,23 +51,15 @@ class UserController extends Controller
     /**
      * Show user.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Spatie\Fractalistic\Fractal
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @authenticated
      * @responseFile responses/auth/user.get.json
      */
     public function show(Request $request)
     {
-        $this->userRepository->pushCriteria(new ThisWhereEqualsCriteria('id', $this->decodeId($request)));
-
-        $user = $this->userRepository->first();
-        if (is_null($user)) {
-            throw new ModelNotFoundException;
-        }
-
-        return $this->transform($user, new UserTransformer);
+        return $this->transform($this->userRepository->find($this->decodeId($request)), new UserTransformer);
     }
 
     /**

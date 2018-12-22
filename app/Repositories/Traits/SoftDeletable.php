@@ -15,26 +15,27 @@ trait SoftDeletable
 {
     /**
      * @param int $id
+     *
      * @return mixed
      */
     public function restore(int $id)
     {
         $this->pushCriteria(new OnlyTrashedCriteria);
-        $user = $this->find($id);
+        $model = $this->find($id);
 
-        $user->restore();
+        $model->restore();
 
-        event(new RepositoryEntityUpdated($this, $user));
-        return $user;
+        event(new RepositoryEntityUpdated($this, $model));
+        return $model;
     }
 
     public function forceDelete(int $id)
     {
         $this->pushCriteria(new OnlyTrashedCriteria);
-        $user = $this->find($id);
+        $model = $this->find($id);
 
-        $user->forceDelete();
+        $model->forceDelete();
 
-        event(new RepositoryEntityUpdated($this, $user));
+        event(new RepositoryEntityUpdated($this, $model));
     }
 }
