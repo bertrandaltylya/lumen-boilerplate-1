@@ -13,10 +13,10 @@ $router->group([
         'as' => 'store',
         'uses' => 'RoleController@store',
     ]);
-//    $router->get('/{id}', [
-//        'as' => 'show',
-//        'uses' => 'RoleController@show',
-//    ]);
+    $router->get('/{id}', [
+        'as' => 'show',
+        'uses' => 'RoleController@show',
+    ]);
 //    $router->put('/{id}/edit', [
 //        'as' => 'update',
 //        'uses' => 'RoleController@update',

@@ -27,7 +27,12 @@ $router->group([
         'as' => 'backend',
     ], function () use ($router) {
 
-        include 'backend/auth/user.php';
-        include 'backend/auth/role.php';
+        $router->group([
+            'prefix' => 'auth',
+        ], function () use ($router) {
+            include 'backend/auth/user.php';
+            include 'backend/auth/role.php';
+            include 'backend/auth/permission.php';
+        });
     });
 });

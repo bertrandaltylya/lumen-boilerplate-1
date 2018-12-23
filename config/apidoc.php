@@ -43,9 +43,7 @@ return [
                  */
                 'prefixes' => [
 //                    '*',
-                    '/user*',
-                    '/profile',
-                    '/role*',
+                    '/auth*',
                 ],
 
                 /*

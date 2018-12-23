@@ -23,24 +23,25 @@ class UserAccessTest extends TestCase
      */
     public function access($method, $uri, $roleName, $statusCode)
     {
+        $uri = "auth/$uri";
         if (!empty($roleName)) {
             $this->loggedInAs($roleName);
         }
 
         $param = [];
-        if ($method === 'post' && $uri === 'user') {
+        if ($method === 'post' && $uri === 'auth/user') {
             // only param
             $param = $this->userData();
-        } elseif ($method === 'get' && $uri === 'user/{id}' ||
-            $method === 'delete' && $uri === 'user/{id}') {
+        } elseif ($method === 'get' && $uri === 'auth/user/{id}' ||
+            $method === 'delete' && $uri === 'auth/user/{id}') {
             // only uri
             $uri = $this->replaceUserUri($uri);
 
-        } elseif ($method === 'put' && $uri === 'user/{id}/restore' ||
-            $method === 'delete' && $uri === 'user/{id}/purge') {
+        } elseif ($method === 'put' && $uri === 'auth/user/{id}/restore' ||
+            $method === 'delete' && $uri === 'auth/user/{id}/purge') {
             // only uri
             $uri = $this->replaceUserUri($uri, true);
-        } elseif ($method === 'put' && $uri === 'user/{id}/edit') {
+        } elseif ($method === 'put' && $uri === 'auth/user/{id}/edit') {
             // both uri and param
             $uri = $this->replaceUserUri($uri);
             $param = $this->userData();

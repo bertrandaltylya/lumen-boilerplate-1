@@ -56,7 +56,7 @@ class UserDeleteController extends Controller
      * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @authenticated
-     * @responseFile responses/auth/user-deleted.get.json
+     * @responseFile responses/auth/users-deleted.get.json
      */
     public function deleted()
     {

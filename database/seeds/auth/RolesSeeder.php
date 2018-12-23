@@ -14,8 +14,9 @@ class RolesSeeder extends Seeder
     public function run()
     {
         $roleModel = app(config('permission.models.role'));
+        $permissionModel = app(config('permission.models.permission'));
 
-        $viewBackend = app(config('permission.models.permission'))::create([
+        $viewBackend = $permissionModel::create([
             'name' => 'view backend',
         ]);
         foreach (['system', 'admin',] as $roleName) {
@@ -25,5 +26,6 @@ class RolesSeeder extends Seeder
         }
 
         $this->seederPermission($roleModel::PERMISSIONS);
+        $this->seederPermission($permissionModel::PERMISSIONS);
     }
 }

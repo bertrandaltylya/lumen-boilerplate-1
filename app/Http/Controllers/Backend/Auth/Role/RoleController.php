@@ -72,4 +72,20 @@ class RoleController extends Controller
             'name' => $request->name,
         ]));
     }
+
+    /**
+     * Show role.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return mixed
+     * @authenticated
+     * @responseFile responses/auth/role.get.json
+     */
+    public function show(Request $request)
+    {
+        $this->roleRepository->setPresenter(RolePresenter::class);
+        return $this->roleRepository->find($this->decodeId($request));
+    }
+
 }
