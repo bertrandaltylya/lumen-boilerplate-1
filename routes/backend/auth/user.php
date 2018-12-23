@@ -15,6 +15,20 @@ $router->group([
         'prefix' => 'user',
     ], function () use ($router) {
 
+        // deletes
+        $router->get('/deleted', [
+            'as' => 'deleted',
+            'uses' => 'UserDeleteController@deleted',
+        ]);
+        $router->put('/{id}/restore', [
+            'as' => 'restore',
+            'uses' => 'UserDeleteController@restore',
+        ]);
+        $router->delete('/{id}/purge', [
+            'as' => 'purge',
+            'uses' => 'UserDeleteController@purge',
+        ]);
+
         // resources
         $router->get('/', [
             'as' => 'index',
@@ -35,16 +49,6 @@ $router->group([
         $router->delete('/{id}', [
             'as' => 'destroy',
             'uses' => 'UserController@destroy',
-        ]);
-
-        // deletes
-        $router->put('/{id}/restore', [
-            'as' => 'restore',
-            'uses' => 'UserDeleteController@restore',
-        ]);
-        $router->delete('/{id}/purge', [
-            'as' => 'purge',
-            'uses' => 'UserDeleteController@purge',
         ]);
     });
 });

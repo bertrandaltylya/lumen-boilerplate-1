@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Backend\Auth\User;
 
+use App\Criterion\Eloquent\OnlyTrashedCriteria;
 use App\Http\Controllers\Controller;
 use App\Presenters\Auth\UserPresenter;
 use App\Repositories\Auth\User\UserRepository;
@@ -27,6 +28,7 @@ class UserDeleteController extends Controller
     {
         $permissions = app($userRepository->model())::PERMISSIONS;
 
+        $this->middleware('permission:' . $permissions['deleted list'], ['only' => 'deleted']);
         $this->middleware('permission:' . $permissions['restore'], ['only' => 'restore']);
         $this->middleware('permission:' . $permissions['purge'], ['only' => 'purge']);
 
@@ -46,6 +48,21 @@ class UserDeleteController extends Controller
     {
         $this->userRepository->setPresenter(UserPresenter::class);
         return $this->userRepository->restore($this->decodeId($request));
+    }
+
+    /**
+     * Get all deleted users.
+     *
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @authenticated
+     * @responseFile responses/auth/user-deleted.get.json
+     */
+    public function deleted()
+    {
+        $this->userRepository->pushCriteria(new OnlyTrashedCriteria);
+        $this->userRepository->setPresenter(UserPresenter::class);
+        return $this->userRepository->paginate();
     }
 
     /**
