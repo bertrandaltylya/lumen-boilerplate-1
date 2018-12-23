@@ -42,7 +42,7 @@ class RoleController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Spatie\Fractalistic\Fractal
+     * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @authenticated
      * @responseFile responses/auth/roles.get.json
