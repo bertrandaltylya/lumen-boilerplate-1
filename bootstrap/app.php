@@ -33,7 +33,6 @@ $app->configure('hashids');
 $app->configure('apidoc');
 
 $app->alias('cache', 'Illuminate\Cache\CacheManager');
-$app->alias('auth', 'Illuminate\Auth\AuthManager');
 
 /*
 |--------------------------------------------------------------------------
