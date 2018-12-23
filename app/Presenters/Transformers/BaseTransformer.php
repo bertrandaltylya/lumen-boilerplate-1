@@ -6,7 +6,7 @@
  * Time: 12:50 AM
  */
 
-namespace App\Transformers;
+namespace App\Presenters\Transformers;
 
 use Illuminate\Support\Carbon;
 use League\Fractal\TransformerAbstract;

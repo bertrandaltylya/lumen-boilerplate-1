@@ -42,11 +42,6 @@ class UserRepository extends BaseRepository
         ]
     ];
 
-//    public function presenter()
-//    {
-//        return UserPresenter::class;
-//    }
-
     /**
      * Specify Model class name
      *

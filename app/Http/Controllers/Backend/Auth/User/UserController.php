@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
+use App\Presenters\Auth\UserPresenter;
 use App\Repositories\Auth\User\UserRepository;
-use App\Repositories\Presenters\Auth\UserPresenter;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 

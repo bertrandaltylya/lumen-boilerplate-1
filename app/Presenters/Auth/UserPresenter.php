@@ -6,10 +6,10 @@
  * Time: 9:49 AM
  */
 
-namespace App\Repositories\Presenters\Auth;
+namespace App\Presenters\Auth;
 
-use App\Repositories\Presenters\BasePresenter;
-use App\Transformers\Auth\UserTransformer;
+use App\Presenters\BasePresenter;
+use App\Presenters\Transformers\Auth\UserTransformer;
 
 class UserPresenter extends BasePresenter
 {
@@ -19,7 +19,6 @@ class UserPresenter extends BasePresenter
         parent::__construct();
         $this->resourceKeyItem =
         $this->resourceKeyCollection = 'users';
-
     }
 
     /**

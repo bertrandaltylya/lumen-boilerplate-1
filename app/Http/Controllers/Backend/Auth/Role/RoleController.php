@@ -9,8 +9,8 @@
 namespace App\Http\Controllers\Backend\Auth\Role;
 
 use App\Http\Controllers\Controller;
+use App\Presenters\Auth\RolePresenter;
 use App\Repositories\Auth\Role\RoleRepository;
-use App\Repositories\Presenters\Auth\RolePresenter;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 

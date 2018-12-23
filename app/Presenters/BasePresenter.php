@@ -6,7 +6,7 @@
  * Time: 10:47 AM
  */
 
-namespace App\Repositories\Presenters;
+namespace App\Presenters;
 
 use League\Fractal\Resource\ResourceAbstract;
 use Prettus\Repository\Presenter\FractalPresenter;

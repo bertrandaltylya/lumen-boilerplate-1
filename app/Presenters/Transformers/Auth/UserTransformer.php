@@ -6,10 +6,10 @@
  * Time: 3:31 PM
  */
 
-namespace App\Transformers\Auth;
+namespace App\Presenters\Transformers\Auth;
 
 use App\Models\Auth\User\User;
-use App\Transformers\BaseTransformer;
+use App\Presenters\Transformers\BaseTransformer;
 
 class UserTransformer extends BaseTransformer
 {
