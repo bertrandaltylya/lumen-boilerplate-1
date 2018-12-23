@@ -8,10 +8,10 @@
 
 namespace App\Presenters\Transformers\Auth;
 
-use App\Models\Auth\Role\Role;
+use App\Models\Auth\Permission\Permission;
 use App\Presenters\Transformers\BaseTransformer;
 
-class RoleTransformer extends BaseTransformer
+class PermissionTransformer extends BaseTransformer
 {
     /**
      * List of resources possible to include
@@ -26,26 +26,20 @@ class RoleTransformer extends BaseTransformer
      * @var array
      */
     protected $defaultIncludes = [
-        'permissions'
     ];
 
     /**
      * A Fractal transformer.
      *
-     * @param \App\Models\Auth\Role\Role $role
+     * @param \App\Models\Auth\Permission\Permission $permission
      *
      * @return array
      */
-    public function transform(Role $role)
+    public function transform(Permission $permission)
     {
         return [
-            'id' => $role->getHashedId(),
-            'name' => $role->name,
+            'id' => $permission->getHashedId(),
+            'name' => $permission->name,
         ];
-    }
-
-    public function includePermissions(Role $role)
-    {
-        return $this->collection($role->permissions, new PermissionTransformer, 'permissions');
     }
 }
