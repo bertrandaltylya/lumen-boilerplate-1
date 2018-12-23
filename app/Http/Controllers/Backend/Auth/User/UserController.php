@@ -119,7 +119,14 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        $isDeleted = $this->userRepository->delete($this->decodeId($request));
-        return $this->noContent();
+        $id = $this->decodeId($request);
+        if (app('auth')->id() == $id) {
+            abort(422, 'You cannot delete your self.');
+        }
+
+        if ($this->userRepository->delete($id)) {
+            return $this->noContent();
+        }
+        abort(500, 'Failed to delete user.');
     }
 }

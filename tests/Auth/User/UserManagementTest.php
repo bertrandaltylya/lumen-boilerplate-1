@@ -10,6 +10,21 @@ class UserManagementTest extends TestCase
     /**
      * @test
      */
+    public function cannotDeleteSelf()
+    {
+        $user = $this->loggedInAs();
+
+        $this->delete(route('backend.user.destroy', ['id' => $user->getHashedId()]));
+
+        $this->assertResponseStatus(422);
+        $this->seeJson([
+            'message' => 'You cannot delete your self.',
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function getUserWithWrongHashedId()
     {
         $this->loggedInAs();
