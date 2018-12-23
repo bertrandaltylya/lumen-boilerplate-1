@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
-use App\Transformers\Auth\UserTransformer;
+use App\Repositories\Presenters\Auth\UserPresenter;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -34,9 +34,9 @@ class UserController extends Controller
     /**
      * Get all users.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
-     * @return \Spatie\Fractalistic\Fractal
+     * @return mixed
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @authenticated
      * @responseFile responses/auth/users.get.json
@@ -44,8 +44,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $this->userRepository->pushCriteria(new RequestCriteria($request));
-
-        return $this->transform($this->userRepository->paginate(), new UserTransformer);
+        $this->userRepository->setPresenter(UserPresenter::class);
+        return $this->userRepository->paginate();
     }
 
     /**
@@ -53,23 +53,24 @@ class UserController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Spatie\Fractalistic\Fractal
+     * @return mixed
      * @authenticated
      * @responseFile responses/auth/user.get.json
      */
     public function show(Request $request)
     {
-        return $this->transform($this->userRepository->find($this->decodeId($request)), new UserTransformer);
+        $this->userRepository->setPresenter(UserPresenter::class);
+        return $this->userRepository->find($this->decodeId($request));
     }
 
     /**
      * Store user.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\JsonResponse
-     * @authenticated
      * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @authenticated
      * @bodyParam    first_name string required First name. Example: Lloric
      * @bodyParam    last_name string required Last name. Example: Garcia
      * @bodyParam    email string required A valid email and unique. Example: lloricode@gmail.com
@@ -78,18 +79,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->created($this->transform($this->userRepository->create($request->all()), new UserTransformer));
+        $this->userRepository->setPresenter(UserPresenter::class);
+        return $this->created($this->userRepository->create($request->all()));
     }
 
     /**
      * Update user.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
-     * @return \Spatie\Fractalistic\Fractal
+     * @return mixed
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      * @authenticated
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      * @bodyParam    first_name string First name. Example: Lloric
      * @bodyParam    last_name string Last name. Example: Garcia
      * @bodyParam    email string A valid email and unique. Example: lloricode@gmail.com
@@ -98,20 +99,19 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = $this->userRepository->update($request->only([
+        $this->userRepository->setPresenter(UserPresenter::class);
+        return $this->userRepository->update($request->only([
             'first_name',
             'last_name',
             'email',
             'password',
         ]), $this->decodeId($request));
-
-        return $this->transform($user, new UserTransformer);
     }
 
     /**
      * Destroy user.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\JsonResponse
      * @authenticated
@@ -119,7 +119,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        $this->userRepository->delete($this->decodeId($request));
+        $isDeleted = $this->userRepository->delete($this->decodeId($request));
         return $this->noContent();
     }
 }

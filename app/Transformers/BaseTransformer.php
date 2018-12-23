@@ -30,46 +30,6 @@ abstract class BaseTransformer extends TransformerAbstract
     }
 
     /**
-     * @param mixed                        $data
-     * @param callable|TransformerAbstract $transformer
-     * @param null                         $resourceKey
-     *
-     * @return \League\Fractal\Resource\Collection
-     */
-    public function collection($data, $transformer, $resourceKey = null)
-    {
-        return parent::collection($data, $transformer, $this->getResourceKey($data, $resourceKey));
-    }
-
-    /**
-     * @param      $data
-     * @param null $resourceKey
-     *
-     * @return string|null
-     */
-    private function getResourceKey($data, $resourceKey = null)
-    {
-        if (is_null($resourceKey) && $data->isNotEmpty()) {
-            $obj = $data->first();
-            $resourceKey = $obj->getResourceKey();
-        }
-        return $resourceKey;
-    }
-
-    /**
-     * @param mixed                        $data
-     * @param callable|TransformerAbstract $transformer
-     * @param null                         $resourceKey
-     *
-     * @return \League\Fractal\Resource\Item
-     */
-    public function item($data, $transformer, $resourceKey = null)
-    {
-        return parent::item($data, $transformer, $this->getResourceKey($data, $resourceKey));
-    }
-
-
-    /**
      * prepare human readable time with users timezone
      *
      * @param       $entity

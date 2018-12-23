@@ -9,17 +9,10 @@
 namespace App\Models\Auth\Role;
 
 use App\Traits\Hashable;
-use App\Traits\HasResourceKeyTrait;
 
 class Role extends \Spatie\Permission\Models\Role
 {
     use Hashable;
-    use HasResourceKeyTrait;
-
-    /**
-     * A resource key to be used by the the JSON API Serializer responses.
-     */
-    protected $resourceKey = 'roles';
 
     /**
      * all permissions

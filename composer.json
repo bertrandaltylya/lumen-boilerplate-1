@@ -13,9 +13,9 @@
     "php": ">=7.1.3",
     "dusterio/lumen-passport": "^0.2.8",
     "laravel/lumen-framework": "5.7.*",
+    "league/fractal": "^0.17.0",
     "mpociot/laravel-apidoc-generator": "^3.1",
     "prettus/l5-repository": "^2.6",
-    "spatie/laravel-fractal": "^5.4",
     "spatie/laravel-permission": "^2.27",
     "vinkla/hashids": "^5.1",
     "vlucas/phpdotenv": "~2.2"
@@ -48,18 +48,18 @@
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ],
     "fresh": [
-      "@php artisan migrate:fresh --seed",
-      "@php artisan passport:install --force",
-      "@php artisan apidoc:generate"
+      "@php artisan migrate:fresh --seed --ansi",
+      "@php artisan passport:install --force --ansi",
+      "@php artisan apidoc:generate --ansi"
     ],
     "clear-all": [
-      "@php artisan cache:clear",
-      "@php artisan permission:cache-reset",
-      "composer dump-autoload --no-interaction --ansi --verbose --optimize"
+      "@php artisan cache:clear --ansi",
+      "@php artisan permission:cache-reset --ansi",
+      "composer dump-autoload --no-interaction --ansi --optimize"
     ],
     "ide-helper": [
-      "@php artisan ide-helper:generate",
-      "@php artisan ide-helper:meta"
+      "@php artisan ide-helper:generate --ansi",
+      "@php artisan ide-helper:meta --ansi"
     ],
     "coverage": [
       "./vendor/bin/phpunit --coverage-html ./coverage"

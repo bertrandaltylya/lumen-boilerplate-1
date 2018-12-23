@@ -14,6 +14,10 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 
 class RoleRepository extends BaseRepository
 {
+    public function test()
+    {
+        dd(__METHOD__, $this->find(1));
+    }
     /**
      * Specify Validator Rules
      *
@@ -34,7 +38,7 @@ class RoleRepository extends BaseRepository
 
         $role = $this->model()::create($attributes);
         event(new RepositoryEntityUpdated($this, $role));
-        return $role;
+        return $this->parserResult($role);
     }
 
     private function validate(array $attributes, $rule)
@@ -52,4 +56,9 @@ class RoleRepository extends BaseRepository
     {
         return config('permission.models.role');
     }
+
+//    public function presenter()
+//    {
+//        return RolePresenter::class;
+//    }
 }

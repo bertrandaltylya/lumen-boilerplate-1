@@ -9,7 +9,8 @@
 namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
-use App\Transformers\Auth\UserTransformer;
+use App\Repositories\Auth\User\UserRepository;
+use App\Repositories\Presenters\Auth\UserPresenter;
 
 /**
  * Class UserAccessController
@@ -22,12 +23,16 @@ class UserAccessController extends Controller
     /**
      * Get current authenticated user.
      *
-     * @return \Spatie\Fractalistic\Fractal
+     * @param \App\Repositories\Auth\User\UserRepository $userRepository
+     *
+     * @return mixed
+     * @throws \Exception
      * @authenticated
      * @responseFile responses/auth/user.get.json
      */
-    public function profile()
+    public function profile(UserRepository $userRepository)
     {
-        return $this->transform(app('auth')->user(), new UserTransformer);
+        $userRepository->setPresenter(new UserPresenter);
+        return $userRepository->find(app('auth')->id());
     }
 }

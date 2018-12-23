@@ -18,24 +18,45 @@ trait SoftDeletable
      *
      * @return mixed
      */
-    public function restore(int $id)
+    public function restore($id)
     {
-        $this->pushCriteria(new OnlyTrashedCriteria);
-        $model = $this->find($id);
-
-        $model->restore();
-
-        event(new RepositoryEntityUpdated($this, $model));
-        return $model;
+        return $this->manageDeletes($id, 'restore');
     }
 
-    public function forceDelete(int $id)
+    /**
+     * @param int    $id
+     * @param string $method
+     *
+     * @return mixed
+     */
+    private function manageDeletes(int $id, string $method)
     {
+        $this->applyScope();
+
+        $temporarySkipPresenter = $this->skipPresenter;
+        $this->skipPresenter(true);
+
         $this->pushCriteria(new OnlyTrashedCriteria);
         $model = $this->find($id);
+        $originalModel = clone $model;
 
-        $model->forceDelete();
+        $this->skipPresenter($temporarySkipPresenter);
+        $this->resetModel();
 
-        event(new RepositoryEntityUpdated($this, $model));
+        $model->{$method}();
+
+        event(new RepositoryEntityUpdated($this, $originalModel));
+
+        return $this->parserResult($model);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function forceDelete(int $id)
+    {
+        return $this->manageDeletes($id, 'forceDelete');
     }
 }

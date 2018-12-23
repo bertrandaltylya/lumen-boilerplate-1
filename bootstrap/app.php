@@ -26,7 +26,6 @@ $app->withFacades();
 $app->withEloquent();
 
 $app->configure('auth');
-$app->configure('fractal');
 $app->configure('permission');
 $app->configure('repository');
 $app->configure('settings');

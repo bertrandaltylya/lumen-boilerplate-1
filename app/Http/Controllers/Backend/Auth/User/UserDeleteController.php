@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Backend\Auth\User;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\User\UserRepository;
-use App\Transformers\Auth\UserTransformer;
+use App\Repositories\Presenters\Auth\UserPresenter;
 use Illuminate\Http\Request;
 
 /**
@@ -36,16 +36,16 @@ class UserDeleteController extends Controller
     /**
      * Restore user.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      *
-     * @return \Spatie\Fractalistic\Fractal
+     * @return mixed
      * @authenticated
      * @responseFile responses/auth/user.get.json
      */
     public function restore(Request $request)
     {
-        $user = $this->userRepository->restore($this->decodeId($request));
-        return $this->transform($user, new UserTransformer);
+        $this->userRepository->setPresenter(UserPresenter::class);
+        return $this->userRepository->restore($this->decodeId($request));
     }
 
     /**

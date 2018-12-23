@@ -14,10 +14,19 @@ use App\Transformers\BaseTransformer;
 class UserTransformer extends BaseTransformer
 {
     /**
-     * @var  array
+     * List of resources possible to include
+     *
+     * @var array
      */
     protected $availableIncludes = [
         'roles',
+    ];
+    /**
+     * List of resources to automatically include
+     *
+     * @var array
+     */
+    protected $defaultIncludes = [
     ];
 
     /**
@@ -45,6 +54,6 @@ class UserTransformer extends BaseTransformer
 
     public function includeRoles(User $user)
     {
-        return $this->collection($user->roles, new RoleTransformer);
+        return $this->collection($user->roles, new RoleTransformer, 'roles');
     }
 }

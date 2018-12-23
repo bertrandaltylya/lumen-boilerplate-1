@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Backend\Auth\Role;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Auth\Role\RoleRepository;
-use App\Transformers\Auth\RoleTransformer;
+use App\Repositories\Presenters\Auth\RolePresenter;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -50,7 +50,8 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $this->roleRepository->pushCriteria(new RequestCriteria($request));
-        return $this->transform($this->roleRepository->paginate(), new RoleTransformer);
+        $this->roleRepository->setPresenter(RolePresenter::class);
+        return $this->roleRepository->paginate();
     }
 
     /**
@@ -66,10 +67,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [
+        $this->roleRepository->setPresenter(RolePresenter::class);
+        return $this->created($this->roleRepository->create([
             'name' => $request->name,
-        ];
-
-        return $this->created($this->transform($this->roleRepository->create($data), new RoleTransformer));
+        ]));
     }
 }
