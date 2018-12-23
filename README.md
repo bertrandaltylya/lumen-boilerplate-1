@@ -36,7 +36,7 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 * [laravel/lumen-framework:5.7.*](https://github.com/laravel/lumen-framework) - The stunningly fast micro-framework by Laravel
 * [laravel/passport](https://github.com/laravel/passport) - OAuth2 server and API authentication
 * [andersao/l5-repository](https://github.com/andersao/l5-repository) - Repositories to abstract the database layer
-* [thephpleague/fractal](https://github.com/thephpleague/fractal) - Output complex, flexible, AJAX/RESTful data structures
+* [thephpleague/fractal](https://github.com/thephpleague/fractal) - Output complex, flexible, AJAX/RESTful data structures, extended by [andersao/l5-repository](https://github.com/andersao/l5-repository)
 * [spatie/laravel-permission](https://github.com/spatie/laravel-permission) - Associate users with roles and permissions
 * [mpociot/laravel-apidoc-generator](https://github.com/mpociot/laravel-apidoc-generator) - Laravel API Documentation Generator
 
