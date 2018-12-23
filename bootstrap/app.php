@@ -83,20 +83,19 @@ $app->routeMiddleware([
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
-//$app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
-
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
-$app->register(Appzcoder\LumenRoutesList\RoutesCommandServiceProvider::class);
-if ($app->environment() !== 'production') {
-    $app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
-}
-
 $app->register(Prettus\Repository\Providers\RepositoryServiceProvider::class);
 $app->register(Spatie\Permission\PermissionServiceProvider::class);
 $app->register(Vinkla\Hashids\HashidsServiceProvider::class);
-$app->register(\Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class);
+$app->register(Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class);
+
+if (class_exists('Appzcoder\LumenRoutesList\RoutesCommandServiceProvider')) {
+    $app->register('Appzcoder\LumenRoutesList\RoutesCommandServiceProvider');
+}
+if (class_exists('Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider')) {
+    $app->register('Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider');
+}
 
 /*
 |--------------------------------------------------------------------------
