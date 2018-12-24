@@ -38,7 +38,7 @@ class RoleAccessTest extends BaseRole
         } elseif ($method === 'delete' && $uri === 'auth/role/{id}') {
             // only uri
             $uri = $this->replaceRoleUri($uri, $this->createRole('test role 123'));
-        } elseif ($method === 'put' && $uri === 'auth/role/{id}/edit') {
+        } elseif ($method === 'put' && $uri === 'auth/role/{id}') {
             // both uri and param
             $uri = $this->replaceRoleUri($uri, $this->createRole('test role 123'));
             $param = [
@@ -58,25 +58,25 @@ class RoleAccessTest extends BaseRole
             'store by system' => ['post', 'role', 'system', 201],
             'index by system' => ['get', 'role', 'system', 200],
             'show by system' => ['get', 'role/{id}', 'system', 200],
-            'update by system' => ['put', 'role/{id}/edit', 'system', 200],
+            'update by system' => ['put', 'role/{id}', 'system', 200],
             'destroy by system' => ['delete', 'role/{id}', 'system', 204],
             // admin
             'store by admin' => ['post', 'role', 'admin', 201],
             'index by admin' => ['get', 'role', 'admin', 200],
             'show by admin' => ['get', 'role/{id}', 'admin', 200],
-            'update by admin' => ['put', 'role/{id}/edit', 'admin', 200],
+            'update by admin' => ['put', 'role/{id}', 'admin', 200],
             'destroy by admin' => ['delete', 'role/{id}', 'admin', 204],
             // role none role
             'store by none role' => ['post', 'role', 'user', 403],
             'index by none role' => ['get', 'role', 'user', 403],
             'show by none role' => ['get', 'role/{id}', 'user', 403],
-            'update by none role' => ['put', 'role/{id}/edit', 'user', 403],
+            'update by none role' => ['put', 'role/{id}', 'user', 403],
             'destroy by none role' => ['delete', 'role/{id}', 'user', 403],
             // guest
             'store by guest' => ['post', 'role', '', 401],
             'index by guest' => ['get', 'role', '', 401],
             'show by guest' => ['get', 'role/{id}', '', 401],
-            'update by guest' => ['put', 'role/{id}/edit', '', 401],
+            'update by guest' => ['put', 'role/{id}', '', 401],
             'destroy by guest' => ['delete', 'role/{id}', '', 401],
         ];
     }

@@ -42,7 +42,7 @@ $router->group([
             'as' => 'show',
             'uses' => 'UserController@show',
         ]);
-        $router->put('/{id}/edit', [
+        $router->put('/{id}', [
             'as' => 'update',
             'uses' => 'UserController@update',
         ]);

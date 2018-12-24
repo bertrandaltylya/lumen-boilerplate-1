@@ -17,7 +17,7 @@ $router->group([
         'as' => 'show',
         'uses' => 'RoleController@show',
     ]);
-    $router->put('/{id}/edit', [
+    $router->put('/{id}', [
         'as' => 'update',
         'uses' => 'RoleController@update',
     ]);
