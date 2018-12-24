@@ -97,6 +97,7 @@ class RoleController extends Controller
      * @throws \Prettus\Repository\Exceptions\RepositoryException
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      * @authenticated
+     * @bodyParam    name string required Role name. Example: test role name
      * @responseFile responses/auth/role.get.json
      */
     public function update(Request $request)
