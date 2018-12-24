@@ -8,9 +8,11 @@
 
 namespace App\Repositories\Auth\Role;
 
+use App\Criterion\Eloquent\ThisWhereEqualsCriteria;
 use App\Repositories\BaseRepository;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Prettus\Validator\Contracts\ValidatorInterface;
+use Spatie\Permission\Guard;
 
 class RoleRepository extends BaseRepository
 {
@@ -28,6 +30,39 @@ class RoleRepository extends BaseRepository
         ],
     ];
 
+    /**
+     * @param array $attributes
+     * @param       $id
+     *
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+    public function update(array $attributes, $id)
+    {
+
+        $this->skipPresenter(true);
+
+        $guardName = Guard::getDefaultName($this->model());
+        $this->pushCriteria(new ThisWhereEqualsCriteria('name', $attributes['name']));
+        $this->pushCriteria(new ThisWhereEqualsCriteria('guard_name', $guardName));
+        if ($this->first()) {
+            abort(422, "A role `{$attributes['name']}` already exists for guard `$guardName`.");
+        }
+
+        return parent::update($attributes, $id);
+    }
+
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model()
+    {
+        return config('permission.models.role');
+    }
+
     public function create(array $attributes)
     {
         $this->validate($attributes, ValidatorInterface::RULE_CREATE);
@@ -41,15 +76,5 @@ class RoleRepository extends BaseRepository
     {
         $attributes = $this->model->newInstance()->forceFill($attributes)->makeVisible($this->model->getHidden())->toArray();
         $this->validator->with($attributes)->passesOrFail($rule);
-    }
-
-    /**
-     * Specify Model class name
-     *
-     * @return string
-     */
-    public function model()
-    {
-        return config('permission.models.role');
     }
 }

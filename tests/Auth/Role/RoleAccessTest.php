@@ -8,10 +8,7 @@
 
 namespace Tests\Auth\Role;
 
-use App\Models\Auth\Role\Role;
-use Tests\TestCase;
-
-class RoleAccessTest extends TestCase
+class RoleAccessTest extends BaseRole
 {
     /**
      * @param $method
@@ -53,19 +50,6 @@ class RoleAccessTest extends TestCase
         $this->assertResponseStatus($statusCode);
     }
 
-    private function replaceRoleUri($uri, Role $role = null): string
-    {
-        $role = is_null($role) ? app(config('permission.models.role'))->first() : $role;
-
-        return str_replace('{id}', $role->getHashedId(), $uri);
-    }
-
-    private function createRole($name): Role
-    {
-        return app(config('permission.models.role'))::create([
-            'name' => $name,
-        ]);
-    }
 
     public function dataResources(): array
     {

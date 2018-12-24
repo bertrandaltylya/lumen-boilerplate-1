@@ -84,15 +84,30 @@ class RoleController extends Controller
      */
     public function show(Request $request)
     {
-        $this->roleRepository->setPresenter(RolePresenter::class);
-        return $this->roleRepository->find($this->decodeId($request));
+        return $this->roleRepository->setPresenter(RolePresenter::class)
+            ->find($this->decodeId($request));
     }
 
+    /**
+     * Update role.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return mixed
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @authenticated
+     * @responseFile responses/auth/role.get.json
+     */
     public function update(Request $request)
     {
         $role = $this->roleRepository->find($this->decodeId($request));
         $this->checkDefault($role->name);
 
+        return $this->roleRepository->setPresenter(RolePresenter::class)
+            ->update([
+                'name' => $request->name,
+            ], $role->id);
     }
 
     /**
@@ -105,12 +120,23 @@ class RoleController extends Controller
         }
     }
 
+    /**
+     * Destroy role.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @authenticated
+     * @responseFile 204 responses/no-content.get.json
+     */
     public function destroy(Request $request)
     {
         $role = $this->roleRepository->find($this->decodeId($request));
         $this->checkDefault($role->name);
 
-        return $this->noContent();
-
+        if ($this->roleRepository->delete($role->id)) {
+            return $this->noContent();
+        }
+        abort(500, 'Failed to delete role.');
     }
 }
