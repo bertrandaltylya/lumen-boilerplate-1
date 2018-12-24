@@ -38,8 +38,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'purge' => 'user purge',
         'restore' => 'user restore',
         // status
-        'update status' => 'user update status',
-        'deactivated list' => 'user deactivated list',
+//        'update status' => 'user update status',
+//        'deactivated list' => 'user deactivated list',
     ];
 
     /**
