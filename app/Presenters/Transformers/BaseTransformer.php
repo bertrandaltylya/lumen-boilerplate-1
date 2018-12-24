@@ -51,8 +51,7 @@ abstract class BaseTransformer extends TransformerAbstract
             return $responseData;
         }
 
-        $defaultTimeZone = config('app.timezone');
-        $timeZone = $auth->check() ? ($auth->user()->timezone ?? $defaultTimeZone) : $defaultTimeZone;
+        $timeZone = $auth->user()->timezone ?? config('app.timezone');
 
         $readable = function ($column) use ($entity, $timeZone) {
 
