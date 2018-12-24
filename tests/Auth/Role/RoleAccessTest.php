@@ -8,6 +8,7 @@
 
 namespace Tests\Auth\Role;
 
+use App\Models\Auth\Role\Role;
 use Tests\TestCase;
 
 class RoleAccessTest extends TestCase
@@ -34,26 +35,36 @@ class RoleAccessTest extends TestCase
             $param = [
                 'name' => 'test role name',
             ];
-        } elseif ($method === 'get' && $uri === 'auth/role/{id}'
-//            || $method === 'delete' && $uri === 'role/{id}'
-        ) {
+        } elseif ($method === 'get' && $uri === 'auth/role/{id}') {
             // only uri
-            $uri = $this->replaceUserUri($uri);
+            $uri = $this->replaceRoleUri($uri);
+        } elseif ($method === 'delete' && $uri === 'auth/role/{id}') {
+            // only uri
+            $uri = $this->replaceRoleUri($uri, $this->createRole('test role 123'));
+        } elseif ($method === 'put' && $uri === 'auth/role/{id}/edit') {
+            // both uri and param
+            $uri = $this->replaceRoleUri($uri, $this->createRole('test role 123'));
+            $param = [
+                'name' => 'test new role name',
+            ];
         }
-// elseif ($method === 'put' && $uri === 'role/{id}/restore' ||
-//            $method === 'delete' && $uri === 'role/{id}/purge') {
-//            // only uri
-//            $uri = $this->replaceUserUri($uri, true);
-//        } elseif ($method === 'put' && $uri === 'role/{id}/edit') {
-//            // both uri and param
-//            $uri = $this->replaceUserUri($uri);
-//            $param = [
-//                'name' => 'test role name',
-//            ];
-//        }
 
         $this->call($method, $uri, $param);
         $this->assertResponseStatus($statusCode);
+    }
+
+    private function replaceRoleUri($uri, Role $role = null): string
+    {
+        $role = is_null($role) ? app(config('permission.models.role'))->first() : $role;
+
+        return str_replace('{id}', $role->getHashedId(), $uri);
+    }
+
+    private function createRole($name): Role
+    {
+        return app(config('permission.models.role'))::create([
+            'name' => $name,
+        ]);
     }
 
     public function dataResources(): array
@@ -63,31 +74,26 @@ class RoleAccessTest extends TestCase
             'store by system' => ['post', 'role', 'system', 201],
             'index by system' => ['get', 'role', 'system', 200],
             'show by system' => ['get', 'role/{id}', 'system', 200],
-//            'update by system' => ['put', 'role/{id}/edit', 'system', 200],
+            'update by system' => ['put', 'role/{id}/edit', 'system', 200],
+            'destroy by system' => ['delete', 'role/{id}', 'system', 204],
             // admin
             'store by admin' => ['post', 'role', 'admin', 201],
             'index by admin' => ['get', 'role', 'admin', 200],
             'show by admin' => ['get', 'role/{id}', 'admin', 200],
-//            'update by admin' => ['put', 'role/{id}/edit', 'admin', 200],
+            'update by admin' => ['put', 'role/{id}/edit', 'admin', 200],
+            'destroy by admin' => ['delete', 'role/{id}', 'admin', 204],
             // role none role
             'store by none role' => ['post', 'role', 'user', 403],
             'index by none role' => ['get', 'role', 'user', 403],
             'show by none role' => ['get', 'role/{id}', 'user', 403],
-//            'update by none role' => ['put', 'role/{id}/edit', 'user', 403],
+            'update by none role' => ['put', 'role/{id}/edit', 'user', 403],
+            'destroy by none role' => ['delete', 'role/{id}', 'user', 403],
             // guest
             'store by guest' => ['post', 'role', '', 401],
             'index by guest' => ['get', 'role', '', 401],
             'show by guest' => ['get', 'role/{id}', '', 401],
-//            'update by guest' => ['put', 'role/{id}/edit', '', 401],
+            'update by guest' => ['put', 'role/{id}/edit', '', 401],
+            'destroy by guest' => ['delete', 'role/{id}', '', 401],
         ];
-    }
-
-    private function replaceUserUri($uri, bool $isDeleted = false): string
-    {
-        $role = app(config('permission.models.role'))->first();
-        if ($isDeleted) {
-            $role->delete();
-        }
-        return str_replace('{id}', $role->getHashedId(), $uri);
     }
 }

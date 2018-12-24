@@ -88,4 +88,29 @@ class RoleController extends Controller
         return $this->roleRepository->find($this->decodeId($request));
     }
 
+    public function update(Request $request)
+    {
+        $role = $this->roleRepository->find($this->decodeId($request));
+        $this->checkDefault($role->name);
+
+    }
+
+    /**
+     * @param string $roleName
+     */
+    private function checkDefault(string $roleName)
+    {
+        if (in_array($roleName, config('access.role_names'))) {
+            abort(422, 'You cannot update/delete default role.');
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $role = $this->roleRepository->find($this->decodeId($request));
+        $this->checkDefault($role->name);
+
+        return $this->noContent();
+
+    }
 }

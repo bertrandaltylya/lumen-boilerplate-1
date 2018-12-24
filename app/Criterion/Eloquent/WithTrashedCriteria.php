@@ -8,7 +8,6 @@
 
 namespace App\Criterion\Eloquent;
 
-
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 

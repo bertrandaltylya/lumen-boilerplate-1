@@ -20,9 +20,11 @@ abstract class BaseTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function filterData(array $response, array $data, array $roleNames = ['system']): array
+    public function filterData(array $response, array $data, array $roleNames = null): array
     {
-        if (app('auth')->user()->hasAnyRole($roleNames)) {
+        if (app('auth')->user()->hasAnyRole(
+            is_null($roleNames) ? config('access.role_names.system') : $roleNames
+        )) {
             return array_merge($response, $data);
         }
 
@@ -47,7 +49,7 @@ abstract class BaseTransformer extends TransformerAbstract
             return $responseData;
         }
 
-        if (!$auth->user()->hasAnyRole(['admin', 'system'])) {
+        if (!$auth->user()->hasAnyRole(config('access.role_names'))) {
             return $responseData;
         }
 

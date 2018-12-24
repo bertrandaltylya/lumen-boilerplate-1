@@ -25,6 +25,7 @@ $app->withFacades();
 
 $app->withEloquent();
 
+$app->configure('access');
 $app->configure('auth');
 $app->configure('permission');
 $app->configure('repository');
