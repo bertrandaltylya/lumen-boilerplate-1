@@ -40,8 +40,8 @@ class RoleRepository extends BaseRepository
      */
     public function update(array $attributes, $id)
     {
-
         $this->skipPresenter(true);
+        $attributes['name'] = isset($attributes['name']) ? $attributes['name'] : '';
 
         $guardName = Guard::getDefaultName($this->model());
         $this->pushCriteria(new ThisWhereEqualsCriteria('name', $attributes['name']));
