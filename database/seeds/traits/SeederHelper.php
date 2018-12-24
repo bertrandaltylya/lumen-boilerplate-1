@@ -11,10 +11,10 @@ trait SeederHelper
             $permission = $permissionModel::create([
                 'name' => $permissionName,
             ]);
-            $roleModel::findByName('system')->givePermissionTo($permission);
+            $roleModel::findByName(config('access.role_names.system'))->givePermissionTo($permission);
             if ($isAddToAdminRole) {
                 if (!in_array($permissionName, $except)) {
-                    $roleModel::findByName('admin')->givePermissionTo($permission);
+                    $roleModel::findByName(config('access.role_names.admin'))->givePermissionTo($permission);
                 }
             }
         }

@@ -35,7 +35,7 @@ abstract class TestCase extends BaseTestCase
         if ($roleName == 'user') {
             $user = factory(User::class)->create();
         } else {
-            $user = User::role($roleName)->first();
+            $user = User::role(config("access.role_names.$roleName"))->first();
         }
         $this->actingAs($user);
 
