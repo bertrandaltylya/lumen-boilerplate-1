@@ -77,6 +77,6 @@ class UserDeleteController extends Controller
     public function purge(Request $request)
     {
         $this->userRepository->forceDelete($this->decodeId($request));
-        return $this->noContent();
+        return response('', 204);
     }
 }

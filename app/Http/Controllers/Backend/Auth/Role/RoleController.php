@@ -68,9 +68,9 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $this->roleRepository->setPresenter(RolePresenter::class);
-        return $this->created($this->roleRepository->create([
+        return response($this->roleRepository->create([
             'name' => $request->name,
-        ]));
+        ]), 201);
     }
 
     /**
@@ -135,7 +135,7 @@ class RoleController extends Controller
         $this->checkDefault($role->name);
 
         if ($this->roleRepository->delete($role->id)) {
-            return $this->noContent();
+            return response('', 204);
         }
         abort(500, 'Failed to delete role.');
     }

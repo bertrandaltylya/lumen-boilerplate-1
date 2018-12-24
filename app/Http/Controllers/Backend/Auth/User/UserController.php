@@ -80,7 +80,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->userRepository->setPresenter(UserPresenter::class);
-        return $this->created($this->userRepository->create($request->all()));
+        return response($this->userRepository->create($request->all()), 201);
     }
 
     /**
@@ -125,7 +125,7 @@ class UserController extends Controller
         }
 
         if ($this->userRepository->delete($id)) {
-            return $this->noContent();
+            return response('', 204);
         }
         abort(500, 'Failed to delete user.');
     }
