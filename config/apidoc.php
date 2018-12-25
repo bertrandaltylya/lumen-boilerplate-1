@@ -43,7 +43,7 @@ return [
                  */
                 'prefixes' => [
 //                    '*',
-                    '/auth*',
+                    '/v1/auth*',
                 ],
 
                 /*
