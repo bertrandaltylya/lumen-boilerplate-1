@@ -21,24 +21,23 @@ class RoleAccessTest extends BaseRole
      */
     public function access($method, $uri, $roleName, $statusCode)
     {
-        $uri = "auth/$uri";
         if (!empty($roleName)) {
             $this->loggedInAs($roleName);
         }
 
         $param = [];
-        if ($method === 'post' && $uri === 'auth/role') {
+        if ($method === 'post' && $uri === 'role') {
             // only param
             $param = [
                 'name' => 'test role name',
             ];
-        } elseif ($method === 'get' && $uri === 'auth/role/{id}') {
+        } elseif ($method === 'get' && $uri === 'role/{id}') {
             // only uri
             $uri = $this->replaceRoleUri($uri);
-        } elseif ($method === 'delete' && $uri === 'auth/role/{id}') {
+        } elseif ($method === 'delete' && $uri === 'role/{id}') {
             // only uri
             $uri = $this->replaceRoleUri($uri, $this->createRole('test role 123'));
-        } elseif ($method === 'put' && $uri === 'auth/role/{id}') {
+        } elseif ($method === 'put' && $uri === 'role/{id}') {
             // both uri and param
             $uri = $this->replaceRoleUri($uri, $this->createRole('test role 123'));
             $param = [
@@ -46,7 +45,7 @@ class RoleAccessTest extends BaseRole
             ];
         }
 
-        $this->call($method, $uri, $param);
+        $this->call($method, 'v1/auth/' . $uri, $param);
         $this->assertResponseStatus($statusCode);
     }
 

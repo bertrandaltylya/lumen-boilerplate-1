@@ -63,7 +63,6 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 */
 
 $app->middleware([
-    App\Http\Middleware\CheckAcceptHeaderMiddleware::class,
     Barryvdh\Cors\HandleCors::class,
 ]);
 
@@ -72,6 +71,7 @@ $app->routeMiddleware([
     'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
     'role' => Spatie\Permission\Middlewares\RoleMiddleware::class,
     'throttle' => Illuminate\Routing\Middleware\ThrottleRequests::class,
+    'check-accept-header' => App\Http\Middleware\CheckAcceptHeaderMiddleware::class,
 ]);
 
 /*

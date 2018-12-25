@@ -26,12 +26,13 @@ class PermissionAccessTest extends TestCase
         if (!empty($roleName)) {
             $this->loggedInAs($roleName);
         }
-        $uri = "auth/$uri";
-        if ($uri == 'auth/permission/{id}') {
+
+        if ($uri == 'permission/{id}') {
             $p = app(config('permission.models.permission'))->first();
             $uri = str_replace('{id}', $p->getHashedId(), $uri);
         }
-        $this->call($method, $uri);
+
+        $this->call($method, 'v1/auth/' . $uri);
         $this->assertResponseStatus($statusCode);
     }
 

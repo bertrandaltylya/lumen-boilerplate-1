@@ -18,36 +18,36 @@ class UserAccessTest extends TestCase
      * @param $uri
      * @param $roleName
      * @param $statusCode
+     *
      * @test
      * @dataProvider dataResources
      */
     public function access($method, $uri, $roleName, $statusCode)
     {
-        $uri = "auth/$uri";
         if (!empty($roleName)) {
             $this->loggedInAs($roleName);
         }
 
         $param = [];
-        if ($method === 'post' && $uri === 'auth/user') {
+        if ($method === 'post' && $uri === 'user') {
             // only param
             $param = $this->userData();
-        } elseif ($method === 'get' && $uri === 'auth/user/{id}' ||
-            $method === 'delete' && $uri === 'auth/user/{id}') {
+        } elseif ($method === 'get' && $uri === 'user/{id}' ||
+            $method === 'delete' && $uri === 'user/{id}') {
             // only uri
             $uri = $this->replaceUserUri($uri);
 
-        } elseif ($method === 'put' && $uri === 'auth/user/{id}/restore' ||
-            $method === 'delete' && $uri === 'auth/user/{id}/purge') {
+        } elseif ($method === 'put' && $uri === 'user/{id}/restore' ||
+            $method === 'delete' && $uri === 'user/{id}/purge') {
             // only uri
             $uri = $this->replaceUserUri($uri, true);
-        } elseif ($method === 'put' && $uri === 'auth/user/{id}') {
+        } elseif ($method === 'put' && $uri === 'user/{id}') {
             // both uri and param
             $uri = $this->replaceUserUri($uri);
             $param = $this->userData();
         }
 
-        $this->call($method, $uri, $param);
+        $this->call($method, 'v1/auth/' . $uri, $param);
         $this->assertResponseStatus($statusCode);
     }
 

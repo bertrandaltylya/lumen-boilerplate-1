@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Dusterio\LumenPassport\LumenPassport;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        LumenPassport::routes($this->app->router);
+        LumenPassport::routes($this->app->router, [
+            'prefix' => 'v1/oauth',
+        ]);
+        LumenPassport::tokensExpireIn(Carbon::now()->addDay());
+        Passport::refreshTokensExpireIn(Carbon::now()->addDays(2));
     }
 }

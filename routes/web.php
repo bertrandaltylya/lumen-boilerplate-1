@@ -19,7 +19,12 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group([
-    'middleware' => ['auth', 'throttle'],
+    'prefix' => 'v1',
+    'middleware' => [
+        'check-accept-header',
+        'auth',
+        'throttle',
+    ],
 ], function () use ($router) {
 
     $router->group([
