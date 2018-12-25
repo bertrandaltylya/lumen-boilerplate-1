@@ -63,6 +63,7 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 */
 
 $app->middleware([
+    App\Http\Middleware\CheckAcceptHeaderMiddleware::class,
     Barryvdh\Cors\HandleCors::class,
 ]);
 

@@ -82,6 +82,7 @@ return [
                  */
                 'headers' => [
                     'Authorization' => 'Bearer: {token}',
+                    'Accept' => 'application/json',
 //                     'Api-Version' => 'v2',
                 ],
 

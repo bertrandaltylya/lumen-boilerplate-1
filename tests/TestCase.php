@@ -8,6 +8,7 @@ use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     use UsesDatabase;
+    use AddHeaderRequestWithAcceptApplicationJson;
 
     public function setUp()
     {
