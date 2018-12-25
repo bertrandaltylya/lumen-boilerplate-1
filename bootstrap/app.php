@@ -71,6 +71,7 @@ $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
     'role' => Spatie\Permission\Middlewares\RoleMiddleware::class,
+    'throttle' => Illuminate\Routing\Middleware\ThrottleRequests::class,
 ]);
 
 /*

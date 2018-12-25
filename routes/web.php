@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group([
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'throttle'],
 ], function () use ($router) {
 
     $router->group([
