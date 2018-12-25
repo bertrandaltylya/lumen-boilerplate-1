@@ -23,9 +23,7 @@ class CheckAcceptHeaderMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $acceptHeader = $request->header('accept');
-
-        if ($acceptHeader != 'application/json') {
+        if ($request->header('accept') != 'application/json') {
             return response([
                 'error' => [
                     'code' => Response::HTTP_BAD_REQUEST,
