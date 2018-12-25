@@ -31,6 +31,7 @@ $app->configure('permission');
 $app->configure('repository');
 $app->configure('settings');
 $app->configure('hashids');
+$app->configure('cors');
 $app->configure('apidoc');
 
 $app->alias('cache', 'Illuminate\Cache\CacheManager');
@@ -61,9 +62,9 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    Barryvdh\Cors\HandleCors::class,
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
@@ -88,6 +89,7 @@ $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(Prettus\Repository\Providers\RepositoryServiceProvider::class);
 $app->register(Spatie\Permission\PermissionServiceProvider::class);
 $app->register(Vinkla\Hashids\HashidsServiceProvider::class);
+$app->register(Barryvdh\Cors\ServiceProvider::class);
 $app->register(Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class);
 
 if (class_exists('Appzcoder\LumenRoutesList\RoutesCommandServiceProvider')) {

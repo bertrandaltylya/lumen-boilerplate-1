@@ -38,6 +38,7 @@ A template made from [Lumen 5.7.*](https://lumen.laravel.com/), authenticated wi
 * [andersao/l5-repository](https://github.com/andersao/l5-repository) - Repositories to abstract the database layer
 * [thephpleague/fractal](https://github.com/thephpleague/fractal) - Output complex, flexible, AJAX/RESTful data structures, extended by [andersao/l5-repository](https://github.com/andersao/l5-repository)
 * [spatie/laravel-permission](https://github.com/spatie/laravel-permission) - Associate users with roles and permissions
+* [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors) - Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
 * [mpociot/laravel-apidoc-generator](https://github.com/mpociot/laravel-apidoc-generator) - Laravel API Documentation Generator
 
 
