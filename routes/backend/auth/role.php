@@ -1,8 +1,8 @@
 <?php
 $router->group([
     'namespace' => 'Auth\Role',
-    'as' => 'role',
-    'prefix' => 'role',
+    'as' => 'roles',
+    'prefix' => 'roles',
 ], function () use ($router) {
     // resources
     $router->get('/', [

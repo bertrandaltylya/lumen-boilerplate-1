@@ -1,8 +1,8 @@
 <?php
 $router->group([
     'namespace' => 'Auth\Permission',
-    'as' => 'permission',
-    'prefix' => 'permission',
+    'as' => 'permissions',
+    'prefix' => 'permissions',
 ], function () use ($router) {
     // resources
     $router->get('/', [

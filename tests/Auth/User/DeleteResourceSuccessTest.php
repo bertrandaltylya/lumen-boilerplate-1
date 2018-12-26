@@ -23,7 +23,7 @@ class DeleteResourceSuccessTest extends TestCase
         $user = factory(User::class)->create();
         $user->delete();
 
-        $this->put(route('backend.user.restore', ['id' => $user->getHashedId()]));
+        $this->put(route('backend.users.restore', ['id' => $user->getHashedId()]));
         $this->assertResponseStatus(200);
 
         $this->seeInDatabase((new User)->getTable(), [
@@ -49,7 +49,7 @@ class DeleteResourceSuccessTest extends TestCase
         $user = factory(User::class)->create();
         $user->delete();
 
-        $this->delete(route('backend.user.purge', ['id' => $user->getHashedId()]));
+        $this->delete(route('backend.users.purge', ['id' => $user->getHashedId()]));
         $this->assertResponseStatus(204);
 
         $this->notSeeInDatabase((new User)->getTable(), [

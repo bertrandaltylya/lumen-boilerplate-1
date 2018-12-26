@@ -27,7 +27,7 @@ class PermissionAccessTest extends TestCase
             $this->loggedInAs($roleName);
         }
 
-        if ($uri == 'permission/{id}') {
+        if ($uri == 'permissions/{id}') {
             $p = app(config('permission.models.permission'))->first();
             $uri = str_replace('{id}', $p->getHashedId(), $uri);
         }
@@ -40,17 +40,17 @@ class PermissionAccessTest extends TestCase
     {
         return [
             // system
-            'index by system' => ['get', 'permission', 'system', 200],
-            'show by system' => ['get', 'permission/{id}', 'system', 200],
+            'index by system' => ['get', 'permissions', 'system', 200],
+            'show by system' => ['get', 'permissions/{id}', 'system', 200],
             // admin
-            'index by admin' => ['get', 'permission', 'admin', 200],
-            'show by admin' => ['get', 'permission/{id}', 'admin', 200],
+            'index by admin' => ['get', 'permissions', 'admin', 200],
+            'show by admin' => ['get', 'permissions/{id}', 'admin', 200],
             // role none role
-            'index by none role' => ['get', 'permission', 'user', 403],
-            'show by none role' => ['get', 'permission/{id}', 'user', 403],
+            'index by none role' => ['get', 'permissions', 'user', 403],
+            'show by none role' => ['get', 'permissions/{id}', 'user', 403],
             // guest
-            'index by guest' => ['get', 'permission', '', 401],
-            'show by guest' => ['get', 'permission/{id}', '', 401],
+            'index by guest' => ['get', 'permissions', '', 401],
+            'show by guest' => ['get', 'permissions/{id}', '', 401],
         ];
     }
 

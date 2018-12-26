@@ -21,7 +21,7 @@ class RoleManagementTest extends BaseRole
     {
         $this->loggedInAs();
 
-        $route = "backend.role.$routeName";
+        $route = "backend.roles.$routeName";
         $paramNoData = [
             'name' => '',
         ];
@@ -46,8 +46,8 @@ class RoleManagementTest extends BaseRole
      * @param $routeName
      *
      * @test
-     * @testWith ["delete", "backend.role.destroy"]
-     *          ["put", "backend.role.update"]
+     * @testWith ["delete", "backend.roles.destroy"]
+     *          ["put", "backend.roles.update"]
      */
     public function defaultRoleNotAllowed($verbMethod, $routeName)
     {
@@ -71,7 +71,7 @@ class RoleManagementTest extends BaseRole
         $data = [
             'name' => 'test new role',
         ];
-        $this->post(route('backend.role.store'), $data);
+        $this->post(route('backend.roles.store'), $data);
 
         $this->assertResponseStatus(201);
         $this->seeJson($data);
@@ -91,7 +91,7 @@ class RoleManagementTest extends BaseRole
             'name' => $roleNameTest . ' new',
         ];
 
-        $this->put(route('backend.role.update', [
+        $this->put(route('backend.roles.update', [
             'id' => $role->getHashedId(),
         ]), $data);
 
@@ -115,7 +115,7 @@ class RoleManagementTest extends BaseRole
             'name' => $duplicateNameTest,
         ];
 
-        $this->put(route('backend.role.update', [
+        $this->put(route('backend.roles.update', [
             'id' => $role->getHashedId(),
         ]), $data);
 
@@ -138,7 +138,7 @@ class RoleManagementTest extends BaseRole
         $data = [
             'name' => $roleNameTest,
         ];
-        $this->post(route('backend.role.store'), $data);
+        $this->post(route('backend.roles.store'), $data);
 
         $this->assertResponseStatus(500); // TODO: fix status code to 422
         $this->seeJson([

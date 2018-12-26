@@ -1,7 +1,7 @@
 <?php
 $router->group([
     'namespace' => 'Auth\User',
-    'as' => 'user',
+    'as' => 'users',
 ], function () use ($router) {
 
 
@@ -12,7 +12,7 @@ $router->group([
     ]);
 
     $router->group([
-        'prefix' => 'user',
+        'prefix' => 'users',
     ], function () use ($router) {
 
         // deletes

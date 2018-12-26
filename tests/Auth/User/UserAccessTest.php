@@ -29,19 +29,19 @@ class UserAccessTest extends TestCase
         }
 
         $param = [];
-        if ($method === 'post' && $uri === 'user') {
+        if ($method === 'post' && $uri === 'users') {
             // only param
             $param = $this->userData();
-        } elseif ($method === 'get' && $uri === 'user/{id}' ||
-            $method === 'delete' && $uri === 'user/{id}') {
+        } elseif ($method === 'get' && $uri === 'users/{id}' ||
+            $method === 'delete' && $uri === 'users/{id}') {
             // only uri
             $uri = $this->replaceUserUri($uri);
 
-        } elseif ($method === 'put' && $uri === 'user/{id}/restore' ||
-            $method === 'delete' && $uri === 'user/{id}/purge') {
+        } elseif ($method === 'put' && $uri === 'users/{id}/restore' ||
+            $method === 'delete' && $uri === 'users/{id}/purge') {
             // only uri
             $uri = $this->replaceUserUri($uri, true);
-        } elseif ($method === 'put' && $uri === 'user/{id}') {
+        } elseif ($method === 'put' && $uri === 'users/{id}') {
             // both uri and param
             $uri = $this->replaceUserUri($uri);
             $param = $this->userData();
@@ -64,41 +64,41 @@ class UserAccessTest extends TestCase
     {
         return [
             // system
-            'store by system' => ['post', 'user', 'system', 201],
-            'index by system' => ['get', 'user', 'system', 200],
-            'show by system' => ['get', 'user/{id}', 'system', 200],
-            'update by system' => ['put', 'user/{id}', 'system', 200],
-            'deleted list by system' => ['get', 'user/deleted', 'system', 200],
-            'destroy by system' => ['delete', 'user/{id}', 'system', 204],
-            'restore by system' => ['put', 'user/{id}/restore', 'system', 200],
-            'purge by system' => ['delete', 'user/{id}/purge', 'system', 204],
+            'store by system' => ['post', 'users', 'system', 201],
+            'index by system' => ['get', 'users', 'system', 200],
+            'show by system' => ['get', 'users/{id}', 'system', 200],
+            'update by system' => ['put', 'users/{id}', 'system', 200],
+            'deleted list by system' => ['get', 'users/deleted', 'system', 200],
+            'destroy by system' => ['delete', 'users/{id}', 'system', 204],
+            'restore by system' => ['put', 'users/{id}/restore', 'system', 200],
+            'purge by system' => ['delete', 'users/{id}/purge', 'system', 204],
             // admin
-            'store by admin' => ['post', 'user', 'admin', 201],
-            'index by admin' => ['get', 'user', 'admin', 200],
-            'show by admin' => ['get', 'user/{id}', 'admin', 200],
-            'update by admin' => ['put', 'user/{id}', 'admin', 200],
-            'deleted list by admin' => ['get', 'user/deleted', 'admin', 200],
-            'destroy by admin' => ['delete', 'user/{id}', 'admin', 204],
-            'restore by admin' => ['put', 'user/{id}/restore', 'admin', 200],
-            'purge by admin' => ['delete', 'user/{id}/purge', 'admin', 204],
+            'store by admin' => ['post', 'users', 'admin', 201],
+            'index by admin' => ['get', 'users', 'admin', 200],
+            'show by admin' => ['get', 'users/{id}', 'admin', 200],
+            'update by admin' => ['put', 'users/{id}', 'admin', 200],
+            'deleted list by admin' => ['get', 'users/deleted', 'admin', 200],
+            'destroy by admin' => ['delete', 'users/{id}', 'admin', 204],
+            'restore by admin' => ['put', 'users/{id}/restore', 'admin', 200],
+            'purge by admin' => ['delete', 'users/{id}/purge', 'admin', 204],
             // user none role
-            'store by none role' => ['post', 'user', 'user', 403],
-            'index by none role' => ['get', 'user', 'user', 403],
-            'show by none role' => ['get', 'user/{id}', 'user', 403],
-            'update by none role' => ['put', 'user/{id}', 'user', 403],
-            'deleted list by none role' => ['get', 'user/deleted', 'user', 403],
-            'destroy by none role' => ['delete', 'user/{id}', 'user', 403],
-            'restore by none role' => ['put', 'user/{id}/restore', 'user', 403],
-            'purge by none role' => ['delete', 'user/{id}/purge', 'user', 403],
+            'store by none role' => ['post', 'users', 'user', 403],
+            'index by none role' => ['get', 'users', 'user', 403],
+            'show by none role' => ['get', 'users/{id}', 'user', 403],
+            'update by none role' => ['put', 'users/{id}', 'user', 403],
+            'deleted list by none role' => ['get', 'users/deleted', 'user', 403],
+            'destroy by none role' => ['delete', 'users/{id}', 'user', 403],
+            'restore by none role' => ['put', 'users/{id}/restore', 'user', 403],
+            'purge by none role' => ['delete', 'users/{id}/purge', 'user', 403],
             // guest
-            'store by guest' => ['post', 'user', '', 401],
-            'index by guest' => ['get', 'user', '', 401],
-            'show by guest' => ['get', 'user/{id}', '', 401],
-            'update by guest' => ['put', 'user/{id}', '', 401],
-            'deleted list by guest' => ['get', 'user/deleted', '', 401],
-            'destroy by guest' => ['delete', 'user/{id}', '', 401],
-            'restore by guest' => ['put', 'user/{id}/restore', '', 401],
-            'purge by guest' => ['delete', 'user/{id}/purge', '', 401],
+            'store by guest' => ['post', 'users', '', 401],
+            'index by guest' => ['get', 'users', '', 401],
+            'show by guest' => ['get', 'users/{id}', '', 401],
+            'update by guest' => ['put', 'users/{id}', '', 401],
+            'deleted list by guest' => ['get', 'users/deleted', '', 401],
+            'destroy by guest' => ['delete', 'users/{id}', '', 401],
+            'restore by guest' => ['put', 'users/{id}/restore', '', 401],
+            'purge by guest' => ['delete', 'users/{id}/purge', '', 401],
         ];
     }
 }

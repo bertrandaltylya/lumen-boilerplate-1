@@ -31,7 +31,7 @@ class UserProfileTest extends TestCase
                 'email',
             ])->toArray();
         }
-        $this->get(route('backend.user.profile'));
+        $this->get(route('backend.users.profile'));
 
         if (!empty($roleName)) {
             $this->seeJson($user);
