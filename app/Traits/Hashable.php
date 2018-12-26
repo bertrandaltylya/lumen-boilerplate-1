@@ -19,7 +19,7 @@ trait Hashable
      *
      * @return int
      */
-    public function decodeId(Request $request, string $keyColumn = 'id'): int
+    public function decodeId(Request $request, string $keyColumn = 'id')
     {
         // https://github.com/laravel/lumen-framework/issues/685#issuecomment-350376018
         // https://github.com/laravel/lumen-framework/issues/685#issuecomment-443393222

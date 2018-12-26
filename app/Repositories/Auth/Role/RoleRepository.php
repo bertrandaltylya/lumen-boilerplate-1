@@ -41,6 +41,9 @@ class RoleRepository extends BaseRepository
     public function update(array $attributes, $id)
     {
         $this->skipPresenter(true);
+
+        $this->checkDefault($id);
+
         $attributes['name'] = isset($attributes['name']) ? $attributes['name'] : '';
 
         $guardName = Guard::getDefaultName($this->model());
@@ -54,6 +57,16 @@ class RoleRepository extends BaseRepository
     }
 
     /**
+     * @param $id
+     */
+    private function checkDefault($id)
+    {
+        if (in_array($this->find($id)->name, config('access.role_names'))) {
+            abort(422, 'You cannot update/delete default role.');
+        }
+    }
+
+    /**
      * Specify Model class name
      *
      * @return string
@@ -61,6 +74,12 @@ class RoleRepository extends BaseRepository
     public function model()
     {
         return config('permission.models.role');
+    }
+
+    public function delete($id)
+    {
+        $this->checkDefault($id);
+        return parent::delete($id);
     }
 
     public function create(array $attributes)

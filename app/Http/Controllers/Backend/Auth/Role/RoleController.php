@@ -91,6 +91,8 @@ class RoleController extends Controller
     /**
      * Update role.
      *
+     * <br />This can be done on none default roles.
+     *
      * @param \Illuminate\Http\Request $request
      *
      * @return mixed
@@ -102,27 +104,17 @@ class RoleController extends Controller
      */
     public function update(Request $request)
     {
-        $role = $this->roleRepository->find($this->decodeId($request));
-        $this->checkDefault($role->name);
+        $this->roleRepository->setPresenter(RolePresenter::class);
 
-        return $this->roleRepository->setPresenter(RolePresenter::class)
-            ->update([
-                'name' => $request->name,
-            ], $role->id);
-    }
-
-    /**
-     * @param string $roleName
-     */
-    private function checkDefault(string $roleName)
-    {
-        if (in_array($roleName, config('access.role_names'))) {
-            abort(422, 'You cannot update/delete default role.');
-        }
+        return $this->roleRepository->update([
+            'name' => $request->input('name'),
+        ], $this->decodeId($request));
     }
 
     /**
      * Destroy role.
+     *
+     * <br />This can be done on none default roles.
      *
      * @param \Illuminate\Http\Request $request
      *
@@ -132,10 +124,7 @@ class RoleController extends Controller
      */
     public function destroy(Request $request)
     {
-        $role = $this->roleRepository->find($this->decodeId($request));
-        $this->checkDefault($role->name);
-
-        if ($this->roleRepository->delete($role->id)) {
+        if ($this->roleRepository->delete($this->decodeId($request))) {
             return response('', 204);
         }
         abort(500, 'Failed to delete role.');
