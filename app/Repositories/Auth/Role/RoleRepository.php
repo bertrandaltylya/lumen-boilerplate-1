@@ -42,28 +42,34 @@ class RoleRepository extends BaseRepository
     {
         $this->skipPresenter(true);
 
-        $this->checkDefault($id);
+        $role = $this->checkDefault($id);
 
         $attributes['name'] = isset($attributes['name']) ? $attributes['name'] : '';
 
         $guardName = Guard::getDefaultName($this->model());
         $this->pushCriteria(new ThisWhereEqualsCriteria('name', $attributes['name']));
         $this->pushCriteria(new ThisWhereEqualsCriteria('guard_name', $guardName));
-        if ($this->first()) {
+        $checkRole = $this->first();
+        if (!is_null($checkRole) && $role->id != $checkRole->id) {
             abort(422, "A role `{$attributes['name']}` already exists for guard `$guardName`.");
         }
 
+        $this->skipPresenter(false);
         return parent::update($attributes, $id);
     }
 
     /**
      * @param $id
+     *
+     * @return mixed
      */
     private function checkDefault($id)
     {
-        if (in_array($this->find($id)->name, config('access.role_names'))) {
+        $role = $this->find($id);
+        if (in_array($role->name, config('access.role_names'))) {
             abort(422, 'You cannot update/delete default role.');
         }
+        return $role;
     }
 
     /**

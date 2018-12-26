@@ -8,7 +8,6 @@ use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     use UsesDatabase;
-    use AddHeaderRequestWithAcceptApplicationJson;
 
     public function setUp()
     {
@@ -29,6 +28,23 @@ abstract class TestCase extends BaseTestCase
     public function createApplication()
     {
         return require __DIR__ . '/../bootstrap/app.php';
+    }
+
+    /**
+     * @param array $headers
+     * @param bool  $isServer
+     *
+     * @return array
+     */
+    protected function addHeaders(array $headers = [], bool $isServer = false)
+    {
+        $headers += [
+            'Accept' => 'application/json',
+        ];
+
+        return $isServer
+            ? $this->transformHeadersToServerVars($headers)
+            : $headers;
     }
 
     protected function loggedInAs(string $roleName = 'system'): User

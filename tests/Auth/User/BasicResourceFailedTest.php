@@ -14,7 +14,7 @@ class BasicResourceFailedTest extends TestCase
     {
         $user = $this->loggedInAs();
 
-        $this->delete(route('backend.users.destroy', ['id' => $user->getHashedId()]));
+        $this->delete(route('backend.users.destroy', ['id' => $user->getHashedId()]), [], $this->addHeaders());
 
         $this->assertResponseStatus(422);
         $this->seeJson([
@@ -34,7 +34,7 @@ class BasicResourceFailedTest extends TestCase
         // remove last char
         $id = substr($hashedId, 0, strlen($hashedId) - 1);
 
-        $this->get(route('backend.users.show', ['id' => $id]));
+        $this->get(route('backend.users.show', ['id' => $id]), $this->addHeaders());
         $this->assertResponseStatus(404);
     }
 
@@ -51,7 +51,7 @@ class BasicResourceFailedTest extends TestCase
 
         $user->delete();
 
-        $this->get(route('backend.users.show', ['id' => $hashedId]));
+        $this->get(route('backend.users.show', ['id' => $hashedId]), $this->addHeaders());
         $this->assertResponseStatus(404);
     }
 }

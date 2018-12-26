@@ -15,6 +15,7 @@ class UserProfileTest extends TestCase
     /**
      * @param $roleName
      * @param $status
+     *
      * @test
      * @testWith ["system", 200]
      *          ["admin", 200]
@@ -31,7 +32,7 @@ class UserProfileTest extends TestCase
                 'email',
             ])->toArray();
         }
-        $this->get(route('backend.users.profile'));
+        $this->get(route('backend.users.profile'), $this->addHeaders());
 
         if (!empty($roleName)) {
             $this->seeJson($user);

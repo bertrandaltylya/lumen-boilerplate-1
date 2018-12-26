@@ -32,7 +32,7 @@ class PermissionAccessTest extends TestCase
             $uri = str_replace('{id}', $p->getHashedId(), $uri);
         }
 
-        $this->call($method, 'v1/auth/' . $uri);
+        $this->call($method, 'v1/auth/' . $uri, [], [], [], $this->addHeaders([], true));
         $this->assertResponseStatus($statusCode);
     }
 

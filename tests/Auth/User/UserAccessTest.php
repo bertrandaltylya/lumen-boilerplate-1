@@ -47,7 +47,7 @@ class UserAccessTest extends TestCase
             $param = $this->userData();
         }
 
-        $this->call($method, 'v1/auth/' . $uri, $param);
+        $this->call($method, 'v1/auth/' . $uri, $param, [], [], $this->addHeaders([], true));
         $this->assertResponseStatus($statusCode);
     }
 

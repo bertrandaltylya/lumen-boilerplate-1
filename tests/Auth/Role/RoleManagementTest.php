@@ -27,12 +27,12 @@ class RoleManagementTest extends BaseRole
         ];
         switch ($routeName) {
             case 'store':
-                $this->post(route($route), $paramNoData);
+                $this->post(route($route), $paramNoData, $this->addHeaders());
                 break;
             case 'update':
                 $this->put(route($route, [
                     'id' => $this->createRole()->getHashedId(),
-                ]), $paramNoData);
+                ]), $paramNoData, $this->addHeaders());
                 break;
         }
         $this->assertResponseStatus(422);
@@ -54,7 +54,7 @@ class RoleManagementTest extends BaseRole
         $this->loggedInAs();
         $this->{$verbMethod}(route($routeName, [
             'id' => $this->getByRoleName('system')->getHashedId(),
-        ]));
+        ]), [], $this->addHeaders());
         $this->assertResponseStatus(422);
         $this->seeJson([
             'message' => 'You cannot update/delete default role.',
@@ -71,7 +71,7 @@ class RoleManagementTest extends BaseRole
         $data = [
             'name' => 'test new role',
         ];
-        $this->post(route('backend.roles.store'), $data);
+        $this->post(route('backend.roles.store'), $data, $this->addHeaders());
 
         $this->assertResponseStatus(201);
         $this->seeJson($data);
@@ -93,7 +93,7 @@ class RoleManagementTest extends BaseRole
 
         $this->put(route('backend.roles.update', [
             'id' => $role->getHashedId(),
-        ]), $data);
+        ]), $data, $this->addHeaders());
 
         $this->assertResponseStatus(200);
         $this->seeJson($data);
@@ -117,7 +117,7 @@ class RoleManagementTest extends BaseRole
 
         $this->put(route('backend.roles.update', [
             'id' => $role->getHashedId(),
-        ]), $data);
+        ]), $data, $this->addHeaders());
 
         $this->assertResponseStatus(422);
         $this->seeJson([
@@ -138,7 +138,7 @@ class RoleManagementTest extends BaseRole
         $data = [
             'name' => $roleNameTest,
         ];
-        $this->post(route('backend.roles.store'), $data);
+        $this->post(route('backend.roles.store'), $data, $this->addHeaders());
 
         $this->assertResponseStatus(500); // TODO: fix status code to 422
         $this->seeJson([

@@ -32,7 +32,7 @@ class UserValidationTest extends TestCase
 
         $this->put(route('backend.users.update', ['id' => $user->getHashedId()]), [
             'email' => $uniqueEmail,
-        ]);
+        ], $this->addHeaders());
 
         $this->assertResponseStatus(422);
         $this->seeJson([
