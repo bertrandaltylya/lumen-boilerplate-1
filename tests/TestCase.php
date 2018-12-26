@@ -17,6 +17,15 @@ abstract class TestCase extends BaseTestCase
             $this->artisan('db:seed');
             $this->artisan('passport:install');
         });
+        app('cache')
+            ->store(
+                config('permission.cache.store') != 'default'
+                    ? config('permission.cache.store')
+                    : null
+            )
+            ->forget(config('permission.cache.key'));
+        app('cache')->flush();
+        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->registerPermissions();
         $this->beginDatabaseTransaction();
     }
 

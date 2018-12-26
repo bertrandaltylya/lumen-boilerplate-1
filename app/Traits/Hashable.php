@@ -23,9 +23,13 @@ trait Hashable
     {
         // https://github.com/laravel/lumen-framework/issues/685#issuecomment-350376018
         // https://github.com/laravel/lumen-framework/issues/685#issuecomment-443393222
-        $hashedKey = $request->route()[2][$keyColumn];
+        return $this->decodeHash($request->route()[2][$keyColumn]);
+    }
 
-        $keyColumnValue = app('hashids')->decode($hashedKey);
+    public function decodeHash(string $hash)
+    {
+
+        $keyColumnValue = app('hashids')->decode($hash);
 
         if (empty($keyColumnValue)) {
             throw new ModelNotFoundException;

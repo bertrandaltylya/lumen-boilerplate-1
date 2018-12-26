@@ -6,7 +6,7 @@
  * Time: 1:14 PM
  */
 
-namespace Tests\Auth\Role;
+namespace Tests\Auth\Authorization;
 
 class RoleAccessTest extends BaseRole
 {

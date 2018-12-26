@@ -11,6 +11,7 @@ namespace App\Repositories\Auth\User;
 use App\Models\Auth\User\User;
 use App\Repositories\BaseRepository;
 use App\Repositories\Traits\SoftDeletable;
+use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 class UserRepository extends BaseRepository
@@ -57,5 +58,45 @@ class UserRepository extends BaseRepository
         $attributes['password'] = app('hash')->make($attributes['password']);
 
         return parent::create($attributes);
+    }
+
+    /**
+     * @param     $id
+     * @param int $roleId
+     */
+    public function assignRole($id, int $roleId)
+    {
+        event(new RepositoryEntityUpdated($this, $this->find($id)->assignRole($roleId)));
+    }
+
+    /**
+     * @param     $id
+     * @param int $permissionId
+     */
+    public function givePermissionTo($id, int $permissionId)
+    {
+        event(new RepositoryEntityUpdated($this, $this->find($id)->givePermissionTo($permissionId)));
+    }
+
+    /**
+     * @param     $id
+     * @param int $roleId
+     */
+    public function removeRole($id, int $roleId)
+    {
+        $user = $this->find($id);
+        $user->removeRole($roleId);
+        event(new RepositoryEntityUpdated($this, $user));
+    }
+
+    /**
+     * @param     $id
+     * @param int $permissionId
+     */
+    public function revokePermissionTo($id, int $permissionId)
+    {
+        $user = $this->find($id);
+        $user->revokePermissionTo($permissionId);
+        event(new RepositoryEntityUpdated($this, $user));
     }
 }

@@ -6,11 +6,9 @@
  * Time: 1:14 PM
  */
 
-namespace Tests\Auth\Role;
+namespace Tests\Auth\Authorization;
 
-use Tests\TestCase;
-
-class PermissionAccessTest extends TestCase
+class PermissionAccessTest extends BaseRole
 {
     /**
      * @param $method

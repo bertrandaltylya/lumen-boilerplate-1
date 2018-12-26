@@ -21,7 +21,8 @@
   ],
   "meta": {
     "include": [
-      "roles"
+      "roles",
+      "permissions"
     ],
     "pagination": {
       "total": 53,

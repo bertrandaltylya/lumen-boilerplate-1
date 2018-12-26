@@ -31,6 +31,26 @@ class RoleRepository extends BaseRepository
     ];
 
     /**
+     * @param     $id
+     * @param int $permissionId
+     */
+    public function revokePermissionTo($id, int $permissionId)
+    {
+        $role = $this->find($id);
+        $role->revokePermissionTo($permissionId);
+        event(new RepositoryEntityUpdated($this, $role));
+    }
+
+    /**
+     * @param     $id
+     * @param int $permissionId
+     */
+    public function givePermissionTo($id, int $permissionId)
+    {
+        event(new RepositoryEntityUpdated($this, $this->find($id)->givePermissionTo($permissionId)));
+    }
+
+    /**
      * @param array $attributes
      * @param       $id
      *

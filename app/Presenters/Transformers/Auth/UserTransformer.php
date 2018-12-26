@@ -20,6 +20,7 @@ class UserTransformer extends BaseTransformer
      */
     protected $availableIncludes = [
         'roles',
+        'permissions',
     ];
     /**
      * List of resources to automatically include
@@ -55,5 +56,10 @@ class UserTransformer extends BaseTransformer
     public function includeRoles(User $user)
     {
         return $this->collection($user->roles, new RoleTransformer, 'roles');
+    }
+
+    public function includePermissions(User $user)
+    {
+        return $this->collection($user->permissions, new PermissionTransformer, 'permissions');
     }
 }

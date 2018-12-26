@@ -38,6 +38,7 @@ $router->group([
             include 'backend/auth/user.php';
             include 'backend/auth/role.php';
             include 'backend/auth/permission.php';
+            include 'backend/auth/authorization.php';
         });
     });
 });
