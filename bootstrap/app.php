@@ -92,8 +92,10 @@ $app->register(Prettus\Repository\Providers\RepositoryServiceProvider::class);
 $app->register(Spatie\Permission\PermissionServiceProvider::class);
 $app->register(Vinkla\Hashids\HashidsServiceProvider::class);
 $app->register(Barryvdh\Cors\ServiceProvider::class);
-$app->register(Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class);
 
+if (class_exists('Mpociot\ApiDoc\ApiDocGeneratorServiceProvider')) {
+    $app->register('Mpociot\ApiDoc\ApiDocGeneratorServiceProvider');
+}
 if (class_exists('Appzcoder\LumenRoutesList\RoutesCommandServiceProvider')) {
     $app->register('Appzcoder\LumenRoutesList\RoutesCommandServiceProvider');
 }
