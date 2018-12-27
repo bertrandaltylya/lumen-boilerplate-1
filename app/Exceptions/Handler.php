@@ -49,26 +49,29 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof ValidatorException) {
-            return $this->prettusValidation($exception);
+        if (!config('app.debug') && $exception instanceof ModelNotFoundException) {
+
+            return $this->responseData(Response::$statusTexts[Response::HTTP_NOT_FOUND],
+                Response::HTTP_NOT_FOUND);
+        } elseif ($exception instanceof ValidatorException) {
+
+            return $this->responseData($exception->getMessageBag(),
+                Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $rendered = parent::render($request, $exception);
-        return response()->json([
-            'error' => [
-                'code' => $rendered->getStatusCode(),
-                'message' => $exception->getMessage(),
-            ],
-        ], $rendered->getStatusCode());
+        return $this->responseData($exception->getMessage(),
+            parent::render($request, $exception)->getStatusCode()
+        );
     }
 
-    private function prettusValidation(ValidatorException $exception)
+    private function responseData($message, $status)
     {
-        return response()->json([
+        return response([
             'error' => [
-                'code' => Response::HTTP_UNPROCESSABLE_ENTITY,
-                'message' => $exception->getMessageBag(),
+                'code' => $status,
+                'message' => $message,
             ],
-        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        ], $status);
     }
+
 }
