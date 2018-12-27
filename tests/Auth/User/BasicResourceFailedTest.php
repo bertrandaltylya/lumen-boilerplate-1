@@ -3,6 +3,7 @@
 namespace Tests\Auth\User;
 
 use App\Models\Auth\User\User;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class BasicResourceFailedTest extends TestCase
@@ -23,10 +24,15 @@ class BasicResourceFailedTest extends TestCase
     }
 
     /**
+     * @param $environment
+     *
      * @test
+     * @testWith ["production"]
+     *      ["local"]
      */
-    public function getUserWithWrongHashedId()
+    public function getUserWithWrongHashedId($environment)
     {
+        putenv("APP_ENV=$environment");
         $this->loggedInAs();
 
         $hashedId = factory(User::class)->create()->getHashedId();
@@ -36,6 +42,11 @@ class BasicResourceFailedTest extends TestCase
 
         $this->get(route('backend.users.show', ['id' => $id]), $this->addHeaders());
         $this->assertResponseStatus(404);
+        $this->seeJson([
+            'message' => $environment == 'production'
+                ? Response::$statusTexts[Response::HTTP_NOT_FOUND]
+                : 'Invalid hashed id.',
+        ]);
     }
 
     /**

@@ -32,7 +32,7 @@ trait Hashable
         $keyColumnValue = app('hashids')->decode($hash);
 
         if (empty($keyColumnValue)) {
-            throw new ModelNotFoundException;
+            throw new ModelNotFoundException('Invalid hashed id.');
         }
 
         return $keyColumnValue[0];

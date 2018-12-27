@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (!config('app.debug') && $exception instanceof ModelNotFoundException) {
+        if ((app()->environment('production') && $exception instanceof ModelNotFoundException)) {
 
             return $this->responseData(Response::$statusTexts[Response::HTTP_NOT_FOUND],
                 Response::HTTP_NOT_FOUND);
