@@ -32,7 +32,6 @@ $app->configure('repository');
 $app->configure('settings');
 $app->configure('hashids');
 $app->configure('cors');
-$app->configure('apidoc');
 
 $app->alias('cache', 'Illuminate\Cache\CacheManager');
 
@@ -94,6 +93,7 @@ $app->register(Vinkla\Hashids\HashidsServiceProvider::class);
 $app->register(Barryvdh\Cors\ServiceProvider::class);
 
 if (class_exists('Mpociot\ApiDoc\ApiDocGeneratorServiceProvider')) {
+    $app->configure('apidoc');
     $app->register('Mpociot\ApiDoc\ApiDocGeneratorServiceProvider');
 }
 if (class_exists('Appzcoder\LumenRoutesList\RoutesCommandServiceProvider')) {
