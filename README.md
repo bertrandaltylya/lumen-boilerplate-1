@@ -1,3 +1,5 @@
+# Please use this https://github.com/lloricode/lumen-dingo-boilerplate
+
 # [Lumen 5.7 Boilerplate](https://github.com/lloricode/lumen-boilerplate)
 
 [![Build Status](https://travis-ci.org/lloricode/lumen-boilerplate.svg?branch=master)](https://travis-ci.org/lloricode/lumen-boilerplate)
